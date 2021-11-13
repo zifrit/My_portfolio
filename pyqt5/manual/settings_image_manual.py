@@ -38,7 +38,7 @@ class Ui_Form(object):
         self.image_setings = QtWidgets.QLabel(Form)
         self.image_setings.setGeometry(QtCore.QRect(60, 0, 541, 371))
         self.image_setings.setText("")
-        self.image_setings.setPixmap(QtGui.QPixmap("manual_0.png"))
+        self.image_setings.setPixmap(QtGui.QPixmap('/Applications/Python project/My_portfolio/pyqt5/manual/manual_0.png'))
         self.image_setings.setScaledContents(True)
         self.image_setings.setObjectName("Image_setings")
         self.bt_exit = QtWidgets.QPushButton(Form)
@@ -84,24 +84,24 @@ class Ui_Form(object):
     def move(self, side):
         if side == 'left':
             if self.i == 0:
-                print('yes_0')
+                # print('lef_0')
                 self.text_setings.setText(self.settings_text_info[str(self.i)])
                 pass
             elif self.i > 0:
-                print('yes_1')
+                # print('lef_1')
                 self.i -= 1
-                a = f'../../../Applications/Python project/python_Evy37/pyqt5/manual/manual_{self.i}.png'
+                a = f'/Applications/Python project/My_portfolio/pyqt5/manual/manual_{self.i}.png'
                 self.text_setings.setText(self.settings_text_info[str(self.i)])
                 self.image_setings.setPixmap(QtGui.QPixmap(f"{a}"))
         elif side == 'right':
             if self.i >= 5:
                 self.text_setings.setText(self.settings_text_info[str(self.i)])
-                print('no_0')
+                # print('ri_0')
                 pass
             elif self.i < 5:
-                print('no_1')
+                # print('ri_1')
                 self.i += 1
-                a = f'../../../Applications/Python project/python_Evy37/pyqt5/manual/manual_{self.i}.png'
+                a = f'/Applications/Python project/My_portfolio/pyqt5/manual/manual_{self.i}.png'
                 self.text_setings.setText(self.settings_text_info[str(self.i)])
                 self.image_setings.setPixmap(QtGui.QPixmap(f"{a}"))
 

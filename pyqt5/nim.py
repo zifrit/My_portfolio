@@ -127,11 +127,18 @@ class Ui_nim(object):
         self.img_bunch_3.setPixmap(QtGui.QPixmap("page_bunch.png"))
         self.img_bunch_3.setObjectName("img_bunch_3")
 
-        self.bt_types_of_errors = QtWidgets.QPushButton(nim)
-        self.bt_types_of_errors.setGeometry(QtCore.QRect(460, 370, 101, 31))
-        self.bt_types_of_errors.setStyleSheet("color: rgb(200, 186, 255);\n"
-                                              "background-color: rgb(51, 53, 140);\n"
-                                              "")
+        # self.bt_types_of_errors = QtWidgets.QPushButton(nim)
+        # self.bt_types_of_errors.setGeometry(QtCore.QRect(460, 370, 101, 31))
+        # self.bt_types_of_errors.setStyleSheet("color: rgb(200, 186, 255);\n"
+        #                                       "background-color: rgb(51, 53, 140);\n"
+        #                                       "")
+
+        self.bt_exit = QtWidgets.QPushButton(nim)
+        self.bt_exit.setGeometry(QtCore.QRect(40, 380, 31, 21))
+        self.bt_exit.setStyleSheet("color: rgb(200, 186, 255);\n"
+                                   "background-color: rgb(51, 53, 140);\n"
+                                   "")
+        self.bt_exit.setObjectName("bt_exit")
 
         self.retranslateUi(nim)
         QtCore.QMetaObject.connectSlotsByName(nim)
@@ -158,7 +165,8 @@ class Ui_nim(object):
         self.info_banch_1.setText(_translate("nim", "Bunch 1"))
         self.info_banch_2.setText(_translate("nim", "Bunch 2"))
         self.info_banch_3.setText(_translate("nim", "Bunch 3"))
-        self.bt_types_of_errors.setText(_translate("nim", "types of errors"))
+        # self.bt_types_of_errors.setText(_translate("nim", "types of errors"))
+        self.bt_exit.setText(_translate("nim", "exit"))
 
     # нач функций кнопок start end reset
     def start_game(self):

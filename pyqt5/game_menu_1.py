@@ -11,15 +11,17 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(518, 460)
+class Ui_Game_Menu(object):
+    def setupUi(self, Game_Menu):
+        Game_Menu.setObjectName("Game_Menu")
+        Game_Menu.resize(518, 460)
         font = QtGui.QFont()
         font.setPointSize(30)
-        MainWindow.setFont(font)
-        MainWindow.setStyleSheet("background-color: rgb(8, 11, 28);")
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        Game_Menu.setFont(font)
+        Game_Menu.setStyleSheet("background-color: rgb(2, 31, 108);\n"
+                                "background-color: rgb(2, 31, 108);\n"
+                                "")
+        self.centralwidget = QtWidgets.QWidget(Game_Menu)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setEnabled(True)
@@ -30,7 +32,8 @@ class Ui_MainWindow(object):
         font.setKerning(True)
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("color: rgb(200, 186, 255);\n"
-"background-color: rgb(8, 11, 28);")
+                                      "background-color: rgb(2, 31, 108);\n"
+                                      "")
         self.pushButton.setCheckable(False)
         self.pushButton.setObjectName("pushButton")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -39,7 +42,8 @@ class Ui_MainWindow(object):
         font.setPointSize(50)
         self.label.setFont(font)
         self.label.setStyleSheet("color: rgb(200, 186, 255);\n"
-"background-color: rgb(8, 11, 28);")
+                                      "background-color: rgb(2, 31, 108);\n"
+                                      "")
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(230, 110, 71, 31))
@@ -47,28 +51,29 @@ class Ui_MainWindow(object):
         font.setPointSize(30)
         self.label_2.setFont(font)
         self.label_2.setStyleSheet("color: rgb(200, 186, 255);\n"
-"background-color: rgb(8, 11, 28);")
+                                      "background-color: rgb(2, 31, 108);\n"
+                                      "")
         self.label_2.setObjectName("label_2")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        Game_Menu.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Game_Menu)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 518, 21))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
-        MainWindow.setMenuBar(self.menubar)
-        self.action = QtWidgets.QAction(MainWindow)
+        Game_Menu.setMenuBar(self.menubar)
+        self.action = QtWidgets.QAction(Game_Menu)
         self.action.setObjectName("action")
-        self.action_2 = QtWidgets.QAction(MainWindow)
+        self.action_2 = QtWidgets.QAction(Game_Menu)
         self.action_2.setObjectName("action_2")
         self.menu.addAction(self.action_2)
         self.menubar.addAction(self.menu.menuAction())
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(Game_Menu)
+        QtCore.QMetaObject.connectSlotsByName(Game_Menu)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, Game_Menu):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        Game_Menu.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "NIMS"))
         self.label.setText(_translate("MainWindow", "Главное меню"))
         self.label_2.setText(_translate("MainWindow", "игры "))
@@ -79,9 +84,10 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    Game_Menu = QtWidgets.QMainWindow()
+    ui = Ui_Game_Menu()
+    ui.setupUi(Game_Menu)
+    Game_Menu.show()
     sys.exit(app.exec_())
