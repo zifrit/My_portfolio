@@ -11,7 +11,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from random import randint
 from PyQt5.QtWidgets import QMessageBox
-from manual.settings_image_manual import Ui_Form
 
 
 class Ui_nim(object):
@@ -112,19 +111,22 @@ class Ui_nim(object):
         self.img_bunch_1 = QtWidgets.QLabel(nim)
         self.img_bunch_1.setGeometry(QtCore.QRect(110, 140, 61, 60))
         self.img_bunch_1.setText("")
-        self.img_bunch_1.setPixmap(QtGui.QPixmap("/Applications/Python project/My_portfolio/pyqt5/manual/page_bunch.png"))
+        self.img_bunch_1.setPixmap(
+            QtGui.QPixmap("/Applications/Python project/My_portfolio/pyqt5/manual/page_bunch.png"))
         self.img_bunch_1.setObjectName("img_bunch_1")
 
         self.img_bunch_2 = QtWidgets.QLabel(nim)
         self.img_bunch_2.setGeometry(QtCore.QRect(250, 140, 61, 60))
         self.img_bunch_2.setText("")
-        self.img_bunch_2.setPixmap(QtGui.QPixmap("/Applications/Python project/My_portfolio/pyqt5/manual/page_bunch.png"))
+        self.img_bunch_2.setPixmap(
+            QtGui.QPixmap("/Applications/Python project/My_portfolio/pyqt5/manual/page_bunch.png"))
         self.img_bunch_2.setObjectName("img_bunch_2")
 
         self.img_bunch_3 = QtWidgets.QLabel(nim)
         self.img_bunch_3.setGeometry(QtCore.QRect(390, 140, 61, 60))
         self.img_bunch_3.setText("")
-        self.img_bunch_3.setPixmap(QtGui.QPixmap("/Applications/Python project/My_portfolio/pyqt5/manual/page_bunch.png"))
+        self.img_bunch_3.setPixmap(
+            QtGui.QPixmap("/Applications/Python project/My_portfolio/pyqt5/manual/page_bunch.png"))
         self.img_bunch_3.setObjectName("img_bunch_3")
 
         # self.bt_types_of_errors = QtWidgets.QPushButton(nim)
@@ -339,15 +341,6 @@ class Ui_nim(object):
             elif int(self.info_banch_1.text()) == 0 and int(self.info_banch_2.text()) == 0 \
                     and int(self.info_banch_3.text()) == 0:
                 self.win()
-
-    # def instr(self):
-    #     global st_im_mn
-    #     # self.label_3.setText('Ход игрока №3')
-    #     st_im_mn = QtWidgets.QWidget()
-    #     ui = Ui_Form()
-    #     ui.setupUi(st_im_mn)
-    #     st_im_mn.show()
-    #     nim.hide()
 
 
 if __name__ == "__main__":

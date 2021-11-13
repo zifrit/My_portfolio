@@ -1,17 +1,16 @@
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 from game_menu_1 import Ui_Game_Menu
 
 from nim import Ui_nim
-from manual.settings_image_manual import Ui_Form
+# from settings_image_manual import Ui_Form
+from pyqt5.settings_image_manual import Ui_Form
 
 app = QtWidgets.QApplication(sys.argv)
 Game_Menu = QtWidgets.QMainWindow()
 ui = Ui_Game_Menu()
 ui.setupUi(Game_Menu)
 Game_Menu.show()
-
-
 def game():
     global nim
     nim = QtWidgets.QWidget()
