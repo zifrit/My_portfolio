@@ -112,19 +112,19 @@ class Ui_nim(object):
         self.img_bunch_1 = QtWidgets.QLabel(nim)
         self.img_bunch_1.setGeometry(QtCore.QRect(110, 140, 61, 60))
         self.img_bunch_1.setText("")
-        self.img_bunch_1.setPixmap(QtGui.QPixmap("page_bunch.png"))
+        self.img_bunch_1.setPixmap(QtGui.QPixmap("/Applications/Python project/My_portfolio/pyqt5/manual/page_bunch.png"))
         self.img_bunch_1.setObjectName("img_bunch_1")
 
         self.img_bunch_2 = QtWidgets.QLabel(nim)
         self.img_bunch_2.setGeometry(QtCore.QRect(250, 140, 61, 60))
         self.img_bunch_2.setText("")
-        self.img_bunch_2.setPixmap(QtGui.QPixmap("page_bunch.png"))
+        self.img_bunch_2.setPixmap(QtGui.QPixmap("/Applications/Python project/My_portfolio/pyqt5/manual/page_bunch.png"))
         self.img_bunch_2.setObjectName("img_bunch_2")
 
         self.img_bunch_3 = QtWidgets.QLabel(nim)
         self.img_bunch_3.setGeometry(QtCore.QRect(390, 140, 61, 60))
         self.img_bunch_3.setText("")
-        self.img_bunch_3.setPixmap(QtGui.QPixmap("page_bunch.png"))
+        self.img_bunch_3.setPixmap(QtGui.QPixmap("/Applications/Python project/My_portfolio/pyqt5/manual/page_bunch.png"))
         self.img_bunch_3.setObjectName("img_bunch_3")
 
         # self.bt_types_of_errors = QtWidgets.QPushButton(nim)
