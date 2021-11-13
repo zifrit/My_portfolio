@@ -38,7 +38,7 @@ class Ui_Form(object):
         self.image_setings = QtWidgets.QLabel(Form)
         self.image_setings.setGeometry(QtCore.QRect(60, 0, 541, 371))
         self.image_setings.setText("")
-        self.image_setings.setPixmap(QtGui.QPixmap('/pyqt5/manual/manual_0.png'))
+        self.image_setings.setPixmap(QtGui.QPixmap('/Applications/Python project/My_portfolio/pyqt5/manual/manual_0.png'))
         self.image_setings.setScaledContents(True)
         self.image_setings.setObjectName("Image_setings")
         self.bt_exit = QtWidgets.QPushButton(Form)
