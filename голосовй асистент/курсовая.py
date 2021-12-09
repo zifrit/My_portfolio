@@ -13,7 +13,7 @@ engine = pyttsx3.init()
 
 cmd1 = {'chek_search': ('найди', 'найти', "поищи"),
         'chek_translate': ("перевести", "переведи"),
-        'name': ('пятница', 'friday'),
+        'name': ('пятница', 'friday', 'катэрия'),
         'question': ('как', 'где', 'почему', 'что'),
         'search':
             {'yandex': ('найди в яндексе', 'найти в яндек   се', 'поищи в яндексе',
@@ -61,24 +61,23 @@ counter = 0
 
 
 def say():
-    r = sr.Recognizer()
+    rec = sr.Recognizer()
     global counter
     if counter == 3:
         counter = 0
         sleep()
     with sr.Microphone(device_index=1) as source:
-        r.pause_threshold = 1
-        r.adjust_for_ambient_noise(source, duration=1)
-        audio = r.listen(source)
+        rec.pause_threshold = 1
+        rec.adjust_for_ambient_noise(source, duration=1)
+        audio = rec.listen(source)
     try:
-        w_y_s = r.recognize_google(audio, language="ru-RU").lower()
+        w_y_s = rec.recognize_google(audio, language="ru-RU").lower()
         print(w_y_s)
         counter = 0
         return w_y_s
     except sr.UnknownValueError:
         print('голон не сраспознан')
         counter += 1
-        print(counter)
         retur = say()
     return retur
 
@@ -154,6 +153,18 @@ def chek(ls_text, full_text):
     # выход из системы
     elif text_voice[0] in ['пока', 'прощай', 'выход']:
         sys.exit()
+    elif '/' in text_voice or 'разделить' in text_voice:
+        bb = str(int(text_voice[0]) / int(text_voice[-1]))
+        speak(bb)
+    elif '*' in text_voice or 'умножить' in text_voice:
+        bb = str(int(text_voice[0]) * int(text_voice[-1]))
+        speak(bb)
+    elif '+' in text_voice or 'плюс' in text_voice:
+        bb = str(int(text_voice[0]) + int(text_voice[-1]))
+        speak(bb)
+    elif '-' in text_voice or 'минус' in text_voice:
+        bb = str(int(text_voice[0]) - int(text_voice[-1]))
+        speak(bb)
     else:
         command(full_text)
 
@@ -263,18 +274,18 @@ def timer(minutes):
     print('время закончилось')
 
 
-def now_time():
-    url = 'https://www.google.ru/search?q=время&newwindow=1&sxsrf=ALeKk03-MHBYlhrh1Rzc8EFTmc9yqwbjTw%3A1618758385674&ei=8Up8YJTWKIadrgT06IKYAw&oq=время&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAELEDEIMBEMkDMgUIABCSAzIFCAAQkgMyAggAMgIIADICCAAyAggAMgIIADIFCAAQsQMyAggAOgcIIxDqAhAnOgQIIxAnOgsIABCxAxDHARCjAjoICAAQsQMQgwE6CAguELEDEIMBOg4IABCxAxCDARDHARCjAjoCCC46BAgAEENQ8rgKWNbMCmD00QpoAnACeACAAeYBiAGhCJIBBTAuNi4xmAEAoAEBqgEHZ3dzLXdperABCsABAQ&sclient=gws-wiz&ved=0ahUKEwjUkrj0iIjwAhWGjosKHXS0ADMQ4dUDCA4&uact=5'
-    user = {
-        'Accept': '*/*',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.86 YaBrowser/21.3.0.663 Yowser/2.5 Safari/537.36'
-    }
-
-    full_page = requests.get(url, headers=user)
-    father = BeautifulSoup(full_page.content, 'html.parser')
-    son = father.findAll('div', {'class': 'gsrt', 'class': 'dDoNo'})
-    son = son[0].text
-    print(son)
+# def now_time():
+#     url = 'https://www.google.ru/search?q=время&newwindow=1&sxsrf=ALeKk03-MHBYlhrh1Rzc8EFTmc9yqwbjTw%3A1618758385674&ei=8Up8YJTWKIadrgT06IKYAw&oq=время&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAELEDEIMBEMkDMgUIABCSAzIFCAAQkgMyAggAMgIIADICCAAyAggAMgIIADIFCAAQsQMyAggAOgcIIxDqAhAnOgQIIxAnOgsIABCxAxDHARCjAjoICAAQsQMQgwE6CAguELEDEIMBOg4IABCxAxCDARDHARCjAjoCCC46BAgAEENQ8rgKWNbMCmD00QpoAnACeACAAeYBiAGhCJIBBTAuNi4xmAEAoAEBqgEHZ3dzLXdperABCsABAQ&sclient=gws-wiz&ved=0ahUKEwjUkrj0iIjwAhWGjosKHXS0ADMQ4dUDCA4&uact=5'
+#     user = {
+#         'Accept': '*/*',
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.86 YaBrowser/21.3.0.663 Yowser/2.5 Safari/537.36'
+#     }
+#
+#     full_page = requests.get(url, headers=user)
+#     father = BeautifulSoup(full_page.content, 'html.parser')
+#     son = father.findAll('div', {'class': 'gsrt', 'class': 'dDoNo'})
+#     son = son[0].text
+#     print(son)
 
 
 def execute_cmd(execution_command):
@@ -317,12 +328,13 @@ def commands(text):
     elif text['command'] == 'english':
         webbrowser.open(
             'https://translate.yandex.ru/?utm_source=wizard&lang=ru-en&text={}'.format(text['text_command']))
-    elif text['command'] == 'now_time':
-        now_time()
-
 
 speak('как дела')
 # name('пятница где находится китай')
-while True:
-    a = input('aa')
-    name(a)
+# while True:
+#     a = input('aa')
+#     speak(a)
+a = 'открыть гугл'
+name(a)
+
+# print(a.split())
