@@ -98,7 +98,7 @@ class Ui_DGU_sistem(object):
         with sqlite3.connect('db/database.db') as db:
             cursor = db.cursor()
             cursor.execute((" Select * from DGU_sistem "))
-            with open('test.txt', 'w', encoding='utf-8') as file:
+            with open('Таблица со степендиантыми.txt', 'w', encoding='utf-8') as file:
                 file.write(
                     '|ФИО' + ' ' * 37 + '|Курс ' + '|Профиль   ' + '|Вид стипендии' + ' ' * 17 + '|Дата стипендии\n')
             for i in cursor:
@@ -106,7 +106,7 @@ class Ui_DGU_sistem(object):
                 len_kurs = str(i[1]) + ('    ')
                 len_profil = i[2] + (' ' * (10 - len(i[2])))
                 len_type_social = i[3] + (' ' * (30 - len(i[3])))
-                with open('test.txt', 'a', encoding='utf-8') as file:
+                with open('Таблица со степендиантыми.txt', 'a', encoding='utf-8') as file:
                     file.write('+' + '-' * 128 + '+\n')
                     file.write(f'|{len_nema}|{len_kurs}|{len_profil}|{len_type_social}|{i[4]}\n')
                     file.write('+' + '-' * 128 + '+\n')
