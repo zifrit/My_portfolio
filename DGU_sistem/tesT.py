@@ -20,6 +20,7 @@ class Ui_Form(object):
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+        self.comboBox.addItem("")
         self.pushButton = QtWidgets.QPushButton(Form)
         self.pushButton.setGeometry(QtCore.QRect(210, 230, 81, 26))
         self.pushButton.setObjectName("pushButton")
@@ -33,8 +34,9 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.comboBox.setItemText(0, _translate("Form", "блокнот"))
-        self.comboBox.setItemText(1, _translate("Form", "excel"))
+        self.comboBox.setItemText(0, _translate("Form", "none"))
+        self.comboBox.setItemText(1, _translate("Form", "блокнот"))
+        self.comboBox.setItemText(2, _translate("Form", "excel"))
         self.pushButton.setText(_translate("Form", "PushButton"))
 
 
