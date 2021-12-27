@@ -49,6 +49,9 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+
+        self.click()
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -63,6 +66,14 @@ class Ui_Form(object):
         self.checkBox_profil.setText(_translate("Form", "Профиль"))
         self.checkBox_5.setText(_translate("Form", "Дата начала и конца"))
         self.exit.setText(_translate("Form", "exit"))
+
+
+    def click(self):
+        self.pull_down_menu_formats.activated[str].connect(self.onActivated)
+
+    def onActivated(self, text):
+        self.initializing_tables_bt.setText(text)
+
 
 
 if __name__ == "__main__":
