@@ -152,16 +152,16 @@ class Ui_Form(object):
                 # print('yes6')
                 pass
 
-            base = {
-                'FIO': FIO,
-                'Course': Course,
-                'Profile': Profile,
-                'Type_social': Type_social,
-                'Data_start_end': Data_start_end,
-            }
-            base = pd.DataFrame(base)
+        base = {
+            'FIO': FIO,
+            'Course': Course,
+            'Profile': Profile,
+            'Type_social': Type_social,
+            'Data_start_end': Data_start_end,
+        }
+        base = pd.DataFrame(base)
         # print(base)
-            base.to_excel('./teams.xlsx', index=False, sheet_name='report')
+        base.to_excel('./teams.xlsx', index=False, sheet_name='report')
 
 
     def checkbox_1(self):
