@@ -163,7 +163,7 @@ class Ui_Form(object):
         for i, j in base.items():
             if j != []:
                 new_base[i] = j
-        base = pd.DataFrame(base)
+        base = pd.DataFrame(new_base)
         # print(base)
         base.to_excel('./teams.xlsx', index=False, sheet_name='report')
 
