@@ -159,6 +159,10 @@ class Ui_Form(object):
             'Type_social': Type_social,
             'Data_start_end': Data_start_end,
         }
+        new_base = {}
+        for i, j in base.items():
+            if j != []:
+                new_base[i] = j
         base = pd.DataFrame(base)
         # print(base)
         base.to_excel('./teams.xlsx', index=False, sheet_name='report')
