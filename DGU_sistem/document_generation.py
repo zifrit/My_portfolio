@@ -165,7 +165,7 @@ class Ui_Form(object):
                 new_base[i] = j
         base = pd.DataFrame(new_base)
         # print(base)
-        base.to_excel('./teams.xlsx', index=False, sheet_name='report')
+        base.to_excel('./teams.xlsx', sheet_name='report')
 
 
     def checkbox_1(self):
