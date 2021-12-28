@@ -91,28 +91,6 @@ class Ui_DGU_sistem(object):
     def clear_menu(self):
         self.bt_clear.clicked.connect(lambda: self.perform_bt_clear())
 
-    # def creat_table(self):
-    #     self.bt_creat.clicked.connect(lambda: self.perform_bt_creat())
-
-    # def perform_bt_creat(self):
-    #     pass
-        # код по генирации данных в блокноте
-        # with sqlite3.connect('db/database.db') as db:
-        #     cursor = db.cursor()
-        #     cursor.execute((" Select * from DGU_sistem "))
-        #     with open('Таблица со степендиантыми.txt', 'w', encoding='utf-8') as file:
-        #         file.write(
-        #             '|ФИО' + ' ' * 37 + '|Курс ' + '|Профиль   ' + '|Вид стипендии' + ' ' * 17 + '|Дата стипендии\n')
-        #     for i in cursor:
-        #         len_nema = i[0] + (' ' * (40 - len(i[0])))
-        #         len_kurs = str(i[1]) + ('    ')
-        #         len_profil = i[2] + (' ' * (10 - len(i[2])))
-        #         len_type_social = i[3] + (' ' * (30 - len(i[3])))
-        #         with open('Таблица со степендиантыми.txt', 'a', encoding='utf-8') as file:
-        #             file.write('+' + '-' * 128 + '+\n')
-        #             file.write(f'|{len_nema}|{len_kurs}|{len_profil}|{len_type_social}|{i[4]}\n')
-        #             file.write('+' + '-' * 128 + '+\n')
-        #     db.commit()
 
     def perform_bt_search(self):
         with sqlite3.connect('db/database.db') as db:
