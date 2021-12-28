@@ -153,11 +153,11 @@ class Ui_Form(object):
                 pass
 
         base = {
-            'FIO': FIO,
-            'Course': Course,
-            'Profile': Profile,
-            'Type_social': Type_social,
-            'Data_start_end': Data_start_end,
+            'ФИО': FIO,
+            'Курс': Course,
+            'Профиль': Profile,
+            'Вид стипендии': Type_social,
+            'Сроки назначения': Data_start_end,
         }
         new_base = {}
         for i, j in base.items():
