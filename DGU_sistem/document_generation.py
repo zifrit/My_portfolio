@@ -9,12 +9,20 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
 
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(500, 220)
+        self.check_what_in_table = {
+            'FIO': False,
+            'Course': False,
+            'Profile': False,
+            'Type_social': False,
+            'Data_start_end': False,
+        }
         self.pull_down_menu_formats = QtWidgets.QComboBox(Form)
         self.pull_down_menu_formats.setGeometry(QtCore.QRect(110, 60, 291, 22))
         self.pull_down_menu_formats.setObjectName("pull_down_menu_formats")
@@ -39,9 +47,9 @@ class Ui_Form(object):
         self.checkBox_profil = QtWidgets.QCheckBox(Form)
         self.checkBox_profil.setGeometry(QtCore.QRect(130, 140, 85, 21))
         self.checkBox_profil.setObjectName("checkBox_profil")
-        self.checkBox_5 = QtWidgets.QCheckBox(Form)
-        self.checkBox_5.setGeometry(QtCore.QRect(330, 140, 151, 21))
-        self.checkBox_5.setObjectName("checkBox_5")
+        self.checkBox_date_start_end = QtWidgets.QCheckBox(Form)
+        self.checkBox_date_start_end.setGeometry(QtCore.QRect(330, 140, 151, 21))
+        self.checkBox_date_start_end.setObjectName("checkBox_5")
         self.exit = QtWidgets.QPushButton(Form)
         self.exit.setGeometry(QtCore.QRect(280, 180, 81, 26))
         self.exit.setObjectName("exit")
@@ -49,8 +57,13 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-
         self.click()
+        self.creat_table_from()
+        self.checkbox_1()
+        self.checkbox_2()
+        self.checkbox_3()
+        self.checkbox_4()
+        self.checkbox_5()
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -64,9 +77,8 @@ class Ui_Form(object):
         self.checkBox_kurss.setText(_translate("Form", "Курсс"))
         self.checkBox_type_of_scholarship.setText(_translate("Form", "Вид стипендии"))
         self.checkBox_profil.setText(_translate("Form", "Профиль"))
-        self.checkBox_5.setText(_translate("Form", "Дата начала и конца"))
+        self.checkBox_date_start_end.setText(_translate("Form", "Дата начала и конца"))
         self.exit.setText(_translate("Form", "exit"))
-
 
     def click(self):
         self.pull_down_menu_formats.activated[str].connect(self.onActivated)
@@ -76,8 +88,63 @@ class Ui_Form(object):
 
 
 
+    def creat_table_from(self):
+        self.initializing_tables_bt.clicked.connect(lambda: self.perform_creat_table_from())
+
+    def perform_creat_table_from(self):
+        # print(self.initializing_tables_bt.text())
+        print(self.check_what_in_table)
+
+
+    def checkbox_1(self):
+        self.checkBox_fio.stateChanged.connect(self.perform_checkBox_1)
+
+    def perform_checkBox_1(self, state):
+        if state == Qt.Checked:
+            self.check_what_in_table['FIO'] = True
+        else:
+            self.check_what_in_table['FIO'] = False
+
+    def checkbox_2(self):
+        self.checkBox_kurss.stateChanged.connect(self.perform_checkBox_2)
+
+    def perform_checkBox_2(self, state):
+        if state == Qt.Checked:
+            self.check_what_in_table['Course'] = True
+        else:
+            self.check_what_in_table['Course'] = False
+
+    def checkbox_3(self):
+        self.checkBox_profil.stateChanged.connect(self.perform_checkBox_3)
+
+    def perform_checkBox_3(self, state):
+        if state == Qt.Checked:
+            self.check_what_in_table['Profile'] = True
+        else:
+            self.check_what_in_table['Profile'] = False
+
+    def checkbox_4(self):
+        self.checkBox_type_of_scholarship.stateChanged.connect(self.perform_checkBox_4)
+
+    def perform_checkBox_4(self, state):
+        if state == Qt.Checked:
+            self.check_what_in_table['Type_social'] = True
+        else:
+            self.check_what_in_table['Type_social'] = False
+
+    def checkbox_5(self):
+        self.checkBox_date_start_end.stateChanged.connect(self.perform_checkBox_5)
+
+    def perform_checkBox_5(self, state):
+        if state == Qt.Checked:
+            self.check_what_in_table['Data_start_end'] = True
+        else:
+            self.check_what_in_table['Data_start_end'] = False
+
+
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
