@@ -159,8 +159,9 @@ class Ui_Form(object):
                 'Type_social': Type_social,
                 'Data_start_end': Data_start_end,
             }
-        print(base)
-
+            base = pd.DataFrame(base)
+        # print(base)
+            base.to_excel('./teams.xlsx', index=False, sheet_name='report')
 
 
     def checkbox_1(self):
