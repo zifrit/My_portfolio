@@ -92,69 +92,69 @@ class Ui_Form(object):
         self.initializing_tables_bt.clicked.connect(lambda: self.perform_creat_table_from())
 
     def perform_creat_table_from(self):
+        FIO = []
+        Course = []
+        Profile = []
+        Type_social = []
+        Data_start_end = []
+        for x, y in self.check_what_in_table.items():
+
+
+            if x == 'FIO' and y == True:
+                # print('yes1')
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        FIO.append(i[0])
+
+
+            if x == 'Course' and y == True:
+                # print('yes2')
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        Course.append(str(i[1]))
+
+
+            if x == 'Profile' and y == True:
+                # print('yes3')
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        Profile.append(i[2])
+
+
+            if x == 'Type_social' and y == True:
+                # print('yes4')
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        Type_social.append(i[3])
+
+
+            if x == 'Data_start_end' and y == True:
+                # print('yes5')
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        Data_start_end.append(i[4])
+            else:
+                # print('yes6')
+                pass
+
+        base = {
+            'ФИО': FIO,
+            'Курс': Course,
+            'Профиль': Profile,
+            'Вид стипендии': Type_social,
+            'Сроки назначения': Data_start_end,
+        }
         if self.initializing_tables_bt.text() == 'excel':
-            FIO = []
-            Course = []
-            Profile = []
-            Type_social = []
-            Data_start_end = []
-            for x, y in self.check_what_in_table.items():
-
-
-                if x == 'FIO' and y == True:
-                    # print('yes1')
-                    with sqlite3.connect('db/database.db') as db:
-                        cursor = db.cursor()
-                        cursor.execute((" Select * from DGU_sistem "))
-                        for i in cursor:
-                            FIO.append(i[0])
-
-
-                if x == 'Course' and y == True:
-                    # print('yes2')
-                    with sqlite3.connect('db/database.db') as db:
-                        cursor = db.cursor()
-                        cursor.execute((" Select * from DGU_sistem "))
-                        for i in cursor:
-                            Course.append(str(i[1]))
-
-
-                if x == 'Profile' and y == True:
-                    # print('yes3')
-                    with sqlite3.connect('db/database.db') as db:
-                        cursor = db.cursor()
-                        cursor.execute((" Select * from DGU_sistem "))
-                        for i in cursor:
-                            Profile.append(i[2])
-
-
-                if x == 'Type_social' and y == True:
-                    # print('yes4')
-                    with sqlite3.connect('db/database.db') as db:
-                        cursor = db.cursor()
-                        cursor.execute((" Select * from DGU_sistem "))
-                        for i in cursor:
-                            Type_social.append(i[3])
-
-
-                if x == 'Data_start_end' and y == True:
-                    # print('yes5')
-                    with sqlite3.connect('db/database.db') as db:
-                        cursor = db.cursor()
-                        cursor.execute((" Select * from DGU_sistem "))
-                        for i in cursor:
-                            Data_start_end.append(i[4])
-                else:
-                    # print('yes6')
-                    pass
-
-            base = {
-                'ФИО': FIO,
-                'Курс': Course,
-                'Профиль': Profile,
-                'Вид стипендии': Type_social,
-                'Сроки назначения': Data_start_end,
-            }
             new_base = {}
             for i, j in base.items():
                 if j != []:
@@ -165,7 +165,43 @@ class Ui_Form(object):
 
 
         elif self.initializing_tables_bt.text() == 'блокнот':
-            print('2')
+            with sqlite3.connect('db/database.db') as db:
+                cursor = db.cursor()
+                cursor.execute((" Select * from DGU_sistem "))
+                with open('Таблица со степендиантыми.txt', 'w', encoding='utf-8') as file:
+                    file.write(
+                        '|ФИО' + ' ' * 37 + '|Курс ' + '|Профиль   ' + '|Вид стипендии' + ' ' * 17 + '|Дата стипендии\n')
+                for i in cursor:
+                    if self.check_what_in_table['FIO'] == True:
+                        len_nema = i[0] + (' ' * (40 - len(i[0])))
+                    else:
+                        len_nema = (' ' * 40)
+
+                    if self.check_what_in_table['Course'] == True:
+                        len_kurs = str(i[1]) + ('    ')
+                    else:
+                        len_kurs = ('     ')
+
+                    if self.check_what_in_table['Profile'] == True:
+                        len_profil = i[2] + (' ' * (10 - len(i[2])))
+                    else:
+                        len_profil = ' ' * 10
+
+                    if self.check_what_in_table['Type_social'] == True:
+                        len_type_social = i[3] + (' ' * (30 - len(i[3])))
+                    else:
+                        len_type_social = ' ' * 30
+
+                    if self.check_what_in_table['Data_start_end'] == True:
+                        len_date_start_end = i[4] + (' ' * (60 -len(i[4])))
+                    else:
+                        len_date_start_end = ' ' * 60
+
+                    with open('Таблица со степендиантыми.txt', 'a', encoding='utf-8') as file:
+                        file.write('+' + '-' * 128 + '+\n')
+                        file.write(f'|{len_nema}|{len_kurs}|{len_profil}|{len_type_social}|{len_date_start_end}\n')
+                        file.write('+' + '-' * 128 + '+\n')
+                db.commit()
         elif self.initializing_tables_bt.text() == 'none' or self.initializing_tables_bt.text() == 'click':
             print('3')
 
