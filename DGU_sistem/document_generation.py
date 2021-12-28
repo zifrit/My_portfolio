@@ -92,11 +92,11 @@ class Ui_Form(object):
         self.initializing_tables_bt.clicked.connect(lambda: self.perform_creat_table_from())
 
     def perform_creat_table_from(self):
-        print(self.initializing_tables_bt.text())
-        print(self.check_what_in_table)
-        with sqlite3.connect('db/database.db') as db:
-            cursor = db.cursor()
-            cursor.execute((" Select * from DGU_sistem "))
+        # print(self.initializing_tables_bt.text())
+        # print(self.check_what_in_table)
+        # with sqlite3.connect('db/database.db') as db:
+        #     cursor = db.cursor()
+        #     cursor.execute((" Select * from DGU_sistem "))
         FIO = []
         Course = []
         Profile = []
@@ -107,32 +107,47 @@ class Ui_Form(object):
 
             if x == 'FIO' and y == True:
                 # print('yes1')
-                for i in cursor:
-                    FIO.append(i[0])
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        FIO.append(i[0])
 
 
             if x == 'Course' and y == True:
                 # print('yes2')
-                for i in cursor:
-                    Course.append(str(i[1]))
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        Course.append(str(i[1]))
 
 
             if x == 'Profile' and y == True:
                 # print('yes3')
-                for i in cursor:
-                    Profile.append(i[2])
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        Profile.append(i[2])
 
 
             if x == 'Type_social' and y == True:
                 # print('yes4')
-                for i in cursor:
-                    Type_social.append(i[3])
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        Type_social.append(i[3])
 
 
             if x == 'Data_start_end' and y == True:
                 # print('yes5')
-                for i in cursor:
-                    Data_start_end.append(i[4])
+                with sqlite3.connect('db/database.db') as db:
+                    cursor = db.cursor()
+                    cursor.execute((" Select * from DGU_sistem "))
+                    for i in cursor:
+                        Data_start_end.append(i[4])
             else:
                 # print('yes6')
                 pass
