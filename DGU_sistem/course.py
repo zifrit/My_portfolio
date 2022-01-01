@@ -14,7 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(70, 90)
+        Form.resize(90, 90)
+        self.choice_course = {
+            'one': True,
+            'two': False,
+            'three': False,
+            'four': False,
+        }
         self.one = QtWidgets.QRadioButton(Form)
         self.one.setGeometry(QtCore.QRect(5, 5, 97, 21))
         self.one.setObjectName("one")
@@ -27,21 +33,65 @@ class Ui_Form(object):
         self.four = QtWidgets.QRadioButton(Form)
         self.four.setGeometry(QtCore.QRect(5, 65, 97, 21))
         self.four.setObjectName("four")
+        self.one.setChecked(True)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.one.toggled.connect(lambda: self.pri())
+        self.two.toggled.connect(lambda: self.prii())
+        self.three.toggled.connect(lambda: self.priii())
+        self.four.toggled.connect(lambda: self.priiii())
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.one.setText(_translate("Form", "4 курс"))
-        self.two.setText(_translate("Form", "3 курс"))
-        self.three.setText(_translate("Form", "2 курс"))
-        self.four.setText(_translate("Form", "1 курс"))
+        self.one.setText(_translate("Form", "1 курс"))
+        self.two.setText(_translate("Form", "2 курс"))
+        self.three.setText(_translate("Form", "3 курс"))
+        self.four.setText(_translate("Form", "4 курс"))
+
+    def pri(self):
+        rb = self.one.sender()
+        if rb.isChecked() == True:
+            self.choice_course['one'] = True
+            print(self.choice_course)
+        elif rb.isChecked() == False:
+            self.choice_course['one'] = False
+
+    def prii(self):
+        rb = self.two.sender()
+        if rb.isChecked() == True:
+            self.choice_course['two'] = True
+            # self.choice_course['one'] = False
+            print(self.choice_course)
+        elif rb.isChecked() == False:
+            self.choice_course['two'] = False
+
+    def priii(self):
+        rb = self.three.sender()
+        if rb.isChecked() == True:
+            self.choice_course['three'] = True
+            # self.choice_course['one'] = False
+            print(self.choice_course)
+        elif rb.isChecked() == False:
+            self.choice_course['three'] = False
+
+    def priiii(self):
+        rb = self.four.sender()
+        if rb.isChecked() == True:
+            self.choice_course['four'] = True
+            # self.choice_course['one'] = False
+            print(self.choice_course)
+        elif rb.isChecked() == False:
+            self.choice_course['four'] = False
+
+        pass
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
