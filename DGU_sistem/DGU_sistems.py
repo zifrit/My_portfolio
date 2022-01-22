@@ -72,6 +72,8 @@ class Ui_DGU_sistem(object):
         self.clear_menu()
         # self.creat_table()
 
+        self.bt_edit.clicked.connect(lambda: self.perform_bt_edit())
+
     def retranslateUi(self, DGU_sistem):
         _translate = QtCore.QCoreApplication.translate
         DGU_sistem.setWindowTitle(_translate("DGU_sistem", "Form"))
@@ -95,6 +97,34 @@ class Ui_DGU_sistem(object):
     def clear_menu(self):
         self.bt_clear.clicked.connect(lambda: self.perform_bt_clear())
 
+
+    def perform_bt_edit(self):
+        FIO = self.input_name.text()
+        try:
+            with sqlite3.connect('db/database.db') as db:
+                cursor = db.cursor()
+                query = (''' DELETE from DGU_sistem WHERE FIO = ?''')
+                cursor.execute(query, (FIO, ))
+                db.commit()
+        except:
+            print('ошибка удолениея')
+
+        FIO = self.input_name.text()
+        Kurs = int(self.input_kurs.text())
+        Profil_student = self.input_profil.text()
+        Type_social = self.input_type_social.text()
+        DD_MM_YY_order = self.input_dd_orders.text()
+
+        try:
+            with sqlite3.connect('db/database.db') as db:
+                cursor = db.cursor()
+                insert = [(FIO, Kurs, Profil_student, Type_social, DD_MM_YY_order)]
+                # query = """ CREATE TABLE if not exists expenses (FIO text, kurs integer, profil text, type_social text, dd_orders text ) """
+                query = """ insert into DGU_sistem (FIO, kurs, profil, type_social, dd_orders) values (?, ?, ?, ?, ?);"""
+                cursor.executemany(query, insert)
+                db.commit()
+        except:
+            print('ошибка добаления после удоления')
 
     def perform_bt_search(self):
         with sqlite3.connect('db/database.db') as db:
@@ -123,13 +153,16 @@ class Ui_DGU_sistem(object):
         Profil_student = self.input_profil.text()
         Type_social = self.input_type_social.text()
         DD_MM_YY_order = self.input_dd_orders.text()
-        with sqlite3.connect('db/database.db') as db:
-            cursor = db.cursor()
-            insert = [(FIO, Kurs, Profil_student, Type_social, DD_MM_YY_order)]
-            # query = """ CREATE TABLE if not exists expenses (FIO text, kurs integer, profil text, type_social text, dd_orders text ) """
-            query = """ insert into DGU_sistem (FIO, kurs, profil, type_social, dd_orders) values (?, ?, ?, ?, ?);"""
-            cursor.executemany(query, insert)
-            db.commit()
+        try:
+            with sqlite3.connect('db/database.db') as db:
+                cursor = db.cursor()
+                insert = [(FIO, Kurs, Profil_student, Type_social, DD_MM_YY_order)]
+                # query = """ CREATE TABLE if not exists expenses (FIO text, kurs integer, profil text, type_social text, dd_orders text ) """
+                query = """ insert into DGU_sistem (FIO, kurs, profil, type_social, dd_orders) values (?, ?, ?, ?, ?);"""
+                cursor.executemany(query, insert)
+                db.commit()
+        except:
+            print('ошибка после добавления')
         self.input_name.setText('')
         self.input_kurs.setText('')
         self.input_profil.setText('')
