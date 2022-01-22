@@ -51,14 +51,17 @@ class Ui_DGU_sistem(object):
         self.bt_search.setGeometry(QtCore.QRect(50, 400, 80, 26))
         self.bt_search.setObjectName("bt_serch")
         self.bt_add = QtWidgets.QPushButton(DGU_sistem)
-        self.bt_add.setGeometry(QtCore.QRect(180, 400, 90, 26))
+        self.bt_add.setGeometry(QtCore.QRect(220, 400, 90, 26))
         self.bt_add.setObjectName("bt_add")
         self.bt_clear = QtWidgets.QPushButton(DGU_sistem)
-        self.bt_clear.setGeometry(QtCore.QRect(300, 400, 90, 26))
+        self.bt_clear.setGeometry(QtCore.QRect(315, 400, 90, 26))
         self.bt_clear.setObjectName("bt_clear")
         self.bt_creat = QtWidgets.QPushButton(DGU_sistem)
         self.bt_creat.setGeometry(QtCore.QRect(408, 400, 150, 26))
         self.bt_creat.setObjectName("bt_creat")
+        self.bt_edit = QtWidgets.QPushButton(DGU_sistem)
+        self.bt_edit.setGeometry(QtCore.QRect(130, 400, 90, 26))
+        self.bt_edit.setObjectName("bt_edit")
 
         self.retranslateUi(DGU_sistem)
         QtCore.QMetaObject.connectSlotsByName(DGU_sistem)
@@ -81,6 +84,7 @@ class Ui_DGU_sistem(object):
         self.bt_add.setText(_translate("DGU_sistem", "Добавить"))
         self.bt_clear.setText(_translate("DGU_sistem", "Очистить"))
         self.bt_creat.setText(_translate("DGU_sistem", "Создать таблицу"))
+        self.bt_edit.setText(_translate("DGU_sistem", "Изменить"))
 
     def add_to_base(self):
         self.bt_add.clicked.connect(lambda: self.perform_add_to_base())
