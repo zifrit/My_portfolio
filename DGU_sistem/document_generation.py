@@ -216,24 +216,14 @@ class Ui_Form(object):
             return date
         date_bd = date.split('-')[1].split('.')
         # print(date_bd)
-        now = datetime.datetime.today().strftime("%m.%d.%y")
-        now = now.split('.')
-        check = 0
-        if int(now[2]) > int(date_bd[2]):
-            return date + ' \"истек \"'
-        if int(now[2]) >= int(date_bd[2]):
-            check += 1
-            # print(check)
-        if int(now[0]) >= int(date_bd[1]):
-            check += 1
-            # print(check)
-        if int(now[1]) >= int(date_bd[0]):
-            check += 1
-            # print(check)
-        if check == 3:
-            return date + ' \"истек\"'
-        if check < 3:
-            return date + ' \"не истек\"'
+        before = datetime.datetime.today()
+        often = datetime.datetime(int(date_bd[2]), int(date_bd[1]), int(date_bd[0]))
+        time = often - before
+        time = str(time).split(',')[0].split(' ')[0]
+        if int(time) < 0:
+            return f'{date} "истек"   {str(time)} дней прошло'
+        else:
+            return f'{date} "не истек"   {str(time)} дней осталось'
 
 
     def checkbox_1(self):
