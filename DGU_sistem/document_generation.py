@@ -105,7 +105,7 @@ class Ui_Form(object):
                 # print('yes1')
                 with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
-                    cursor.execute((" Select * from DGU_sistem "))
+                    cursor.execute((" Select * from expenses "))
                     for i in cursor:
                         FIO.append(i[0])
 
@@ -114,7 +114,7 @@ class Ui_Form(object):
                 # print('yes2')
                 with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
-                    cursor.execute((" Select * from DGU_sistem "))
+                    cursor.execute((" Select * from expenses "))
                     for i in cursor:
                         Course.append(str(i[1]))
 
@@ -123,7 +123,7 @@ class Ui_Form(object):
                 # print('yes3')
                 with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
-                    cursor.execute((" Select * from DGU_sistem "))
+                    cursor.execute((" Select * from expenses "))
                     for i in cursor:
                         Profile.append(i[2])
 
@@ -132,7 +132,7 @@ class Ui_Form(object):
                 # print('yes4')
                 with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
-                    cursor.execute((" Select * from DGU_sistem "))
+                    cursor.execute((" Select * from expenses "))
                     for i in cursor:
                         Type_social.append(i[3])
 
@@ -141,7 +141,7 @@ class Ui_Form(object):
                 # print('yes5')
                 with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
-                    cursor.execute((" Select * from DGU_sistem "))
+                    cursor.execute((" Select * from expenses "))
                     for i in cursor:
                         # self.check_end(i[4])
                         Data_start_end.append(self.check_end(i[4]))
@@ -169,7 +169,7 @@ class Ui_Form(object):
         elif self.initializing_tables_bt.text() == 'блокнот':
             with sqlite3.connect(self.way_Date_base) as db:
                 cursor = db.cursor()
-                cursor.execute((" Select * from DGU_sistem "))
+                cursor.execute((" Select * from expenses "))
                 with open('Таблица со степендиантыми.txt', 'w', encoding='utf-8') as file:
                     file.write(
                         '|ФИО' + ' ' * 37 + '|Курс ' + '|Профиль   ' + '|Вид стипендии' + ' ' * 17 + '|Дата стипендии\n')
@@ -212,7 +212,10 @@ class Ui_Form(object):
 
     def check_end(self, date):
         import datetime
-        date_bd = date.split('.')
+        if date in ['сирота', 'бессрочно', 'инвалид', 'Инвалид', 'ИНВАЛИД', 'Бессрочно', 'БЕССРОЧНО', 'Сирота', 'СИРОТА']:
+            return date
+        date_bd = date.split('-')[1].split('.')
+        # print(date_bd)
         now = datetime.datetime.today().strftime("%m.%d.%y")
         now = now.split('.')
         check = 0
@@ -220,17 +223,17 @@ class Ui_Form(object):
             return date + ' \"истек \"'
         if int(now[2]) >= int(date_bd[2]):
             check += 1
-            print(check)
+            # print(check)
         if int(now[0]) >= int(date_bd[1]):
             check += 1
-            print(check)
+            # print(check)
         if int(now[1]) >= int(date_bd[0]):
             check += 1
-            print(check)
+            # print(check)
         if check == 3:
             return date + ' \"истек\"'
         if check < 3:
-            return date
+            return date + ' \"не истек\"'
 
 
     def checkbox_1(self):
