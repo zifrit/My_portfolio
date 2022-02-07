@@ -218,8 +218,8 @@ class Ui_Form(object):
         # print(date_bd)
         before = datetime.datetime.today()
         often = datetime.datetime(int(date_bd[2]), int(date_bd[1]), int(date_bd[0]))
-        time = often - before
-        time = str(time).split(',')[0].split(' ')[0]
+        time = str(often - before).split(',')[0].split(' ')[0]
+        # time = str(time).split(',')[0].split(' ')[0]
         if int(time) < 0:
             return f'{date} "истек"   {str(time)} дней прошло'
         else:
