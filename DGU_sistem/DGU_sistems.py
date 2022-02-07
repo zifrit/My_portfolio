@@ -16,6 +16,7 @@ class Ui_DGU_sistem(object):
     def setupUi(self, DGU_sistem):
         DGU_sistem.setObjectName("DGU_sistem")
         DGU_sistem.resize(600, 480)
+        self.way_Date_base = 'db/database.db'
         self.kurs = QtWidgets.QLabel(DGU_sistem)
         self.kurs.setGeometry(QtCore.QRect(50, 100, 60, 16))
         self.kurs.setObjectName("kurs")
@@ -101,7 +102,7 @@ class Ui_DGU_sistem(object):
     def perform_bt_edit(self):
         FIO = self.input_name.text()
         try:
-            with sqlite3.connect('db/database.db') as db:
+            with sqlite3.connect(self.way_Date_base) as db:
                 cursor = db.cursor()
                 query = (''' DELETE from DGU_sistem WHERE FIO = ?''')
                 cursor.execute(query, (FIO, ))
@@ -116,7 +117,7 @@ class Ui_DGU_sistem(object):
         DD_MM_YY_order = self.input_dd_orders.text()
 
         try:
-            with sqlite3.connect('db/database.db') as db:
+            with sqlite3.connect(self.way_Date_base) as db:
                 cursor = db.cursor()
                 insert = [(FIO, Kurs, Profil_student, Type_social, DD_MM_YY_order)]
                 # query = """ CREATE TABLE if not exists expenses (FIO text, kurs integer, profil text, type_social text, dd_orders text ) """
@@ -127,7 +128,7 @@ class Ui_DGU_sistem(object):
             print('ошибка добаления после удоления')
 
     def perform_bt_search(self):
-        with sqlite3.connect('db/database.db') as db:
+        with sqlite3.connect(self.way_Date_base) as db:
             cursor = db.cursor()
             cursor.execute((" Select * from DGU_sistem "))
             FIO = self.input_name.text()
@@ -154,7 +155,7 @@ class Ui_DGU_sistem(object):
         Type_social = self.input_type_social.text()
         DD_MM_YY_order = self.input_dd_orders.text()
         try:
-            with sqlite3.connect('db/database.db') as db:
+            with sqlite3.connect(self.way_Date_base) as db:
                 cursor = db.cursor()
                 insert = [(FIO, Kurs, Profil_student, Type_social, DD_MM_YY_order)]
                 # query = """ CREATE TABLE if not exists expenses (FIO text, kurs integer, profil text, type_social text, dd_orders text ) """

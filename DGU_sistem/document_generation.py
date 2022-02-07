@@ -25,6 +25,7 @@ class Ui_Form(object):
             'Type_social': False,
             'Data_start_end': False,
         }
+        self.way_Date_base = 'db/database.db'
         self.pull_down_menu_formats = QtWidgets.QComboBox(Form)
         self.pull_down_menu_formats.setGeometry(QtCore.QRect(110, 60, 291, 22))
         self.pull_down_menu_formats.setObjectName("pull_down_menu_formats")
@@ -102,7 +103,7 @@ class Ui_Form(object):
 
             if x == 'FIO' and y == True:
                 # print('yes1')
-                with sqlite3.connect('db/database.db') as db:
+                with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
                     cursor.execute((" Select * from DGU_sistem "))
                     for i in cursor:
@@ -111,7 +112,7 @@ class Ui_Form(object):
 
             if x == 'Course' and y == True:
                 # print('yes2')
-                with sqlite3.connect('db/database.db') as db:
+                with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
                     cursor.execute((" Select * from DGU_sistem "))
                     for i in cursor:
@@ -120,7 +121,7 @@ class Ui_Form(object):
 
             if x == 'Profile' and y == True:
                 # print('yes3')
-                with sqlite3.connect('db/database.db') as db:
+                with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
                     cursor.execute((" Select * from DGU_sistem "))
                     for i in cursor:
@@ -129,7 +130,7 @@ class Ui_Form(object):
 
             if x == 'Type_social' and y == True:
                 # print('yes4')
-                with sqlite3.connect('db/database.db') as db:
+                with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
                     cursor.execute((" Select * from DGU_sistem "))
                     for i in cursor:
@@ -138,11 +139,12 @@ class Ui_Form(object):
 
             if x == 'Data_start_end' and y == True:
                 # print('yes5')
-                with sqlite3.connect('db/database.db') as db:
+                with sqlite3.connect(self.way_Date_base) as db:
                     cursor = db.cursor()
                     cursor.execute((" Select * from DGU_sistem "))
                     for i in cursor:
-                        Data_start_end.append(i[4])
+                        # self.check_end(i[4])
+                        Data_start_end.append(self.check_end(i[4]))
             else:
                 # print('yes6')
                 pass
@@ -165,7 +167,7 @@ class Ui_Form(object):
 
 
         elif self.initializing_tables_bt.text() == 'блокнот':
-            with sqlite3.connect('db/database.db') as db:
+            with sqlite3.connect(self.way_Date_base) as db:
                 cursor = db.cursor()
                 cursor.execute((" Select * from DGU_sistem "))
                 with open('Таблица со степендиантыми.txt', 'w', encoding='utf-8') as file:
@@ -193,7 +195,9 @@ class Ui_Form(object):
                         len_type_social = ' ' * 30
 
                     if self.check_what_in_table['Data_start_end'] == True:
-                        len_date_start_end = i[4] + (' ' * (60 -len(i[4])))
+                        # i[4] = self.check_end(str(i[4]))
+                        # print(i[4])
+                        len_date_start_end = self.check_end(i[4]) + (' ' * (60 -len(self.check_end(i[4]))))
                     else:
                         len_date_start_end = ' ' * 60
 
@@ -204,6 +208,30 @@ class Ui_Form(object):
                 db.commit()
         elif self.initializing_tables_bt.text() == 'none' or self.initializing_tables_bt.text() == 'click':
             print('3')
+
+
+    def check_end(self, date):
+        import datetime
+        date_bd = date.split('.')
+        now = datetime.datetime.today().strftime("%m.%d.%y")
+        now = now.split('.')
+        check = 0
+        if int(now[2]) > int(date_bd[2]):
+            return date + ' \"истек \"'
+        if int(now[2]) >= int(date_bd[2]):
+            check += 1
+            print(check)
+        if int(now[0]) >= int(date_bd[1]):
+            check += 1
+            print(check)
+        if int(now[1]) >= int(date_bd[0]):
+            check += 1
+            print(check)
+        if check == 3:
+            return date + ' \"истек\"'
+        if check < 3:
+            return date
+
 
     def checkbox_1(self):
         self.checkBox_fio.stateChanged.connect(self.perform_checkBox_1)
