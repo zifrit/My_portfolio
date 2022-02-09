@@ -80,6 +80,8 @@ class Ui_DGU_sistem(object):
         # self.creat_table()
 
         self.bt_edit.clicked.connect(lambda: self.perform_bt_edit())
+        self.bt_delete.clicked.connect(lambda: self.perform_bt_delete())
+        self.bt_import.clicked.connect(lambda: self.perform_bt_import())
 
     def retranslateUi(self, DGU_sistem):
         _translate = QtCore.QCoreApplication.translate
@@ -105,6 +107,20 @@ class Ui_DGU_sistem(object):
 
     def clear_menu(self):
         self.bt_clear.clicked.connect(lambda: self.perform_bt_clear())
+
+
+    def perform_bt_delete(self):
+        FIO = self.input_name.text()
+        try:
+            with sqlite3.connect(self.way_Date_base) as db:
+                cursor = db.cursor()
+                query = (''' DELETE from DGU_sistem WHERE FIO = ?''')
+                cursor.execute(query, (FIO,))
+                db.commit()
+        except:
+            print('ошибка удолениея')
+        self.perform_bt_clear()
+
 
 
     def perform_bt_edit(self):
@@ -157,11 +173,14 @@ class Ui_DGU_sistem(object):
         self.input_dd_orders.setText('')
 
     def perform_add_to_base(self):
-        FIO = self.input_name.text()
-        Kurs = int(self.input_kurs.text())
-        Profil_student = self.input_profil.text()
-        Type_social = self.input_type_social.text()
-        DD_MM_YY_order = self.input_dd_orders.text()
+        try:
+            FIO = self.input_name.text()
+            Kurs = int(self.input_kurs.text())
+            Profil_student = self.input_profil.text()
+            Type_social = self.input_type_social.text()
+            DD_MM_YY_order = self.input_dd_orders.text()
+        except:
+            print('ошибка')
         try:
             with sqlite3.connect(self.way_Date_base) as db:
                 cursor = db.cursor()
@@ -171,7 +190,7 @@ class Ui_DGU_sistem(object):
                 cursor.executemany(query, insert)
                 db.commit()
         except:
-            print('ошибка после добавления')
+            print('ошибка добавления')
         self.input_name.setText('')
         self.input_kurs.setText('')
         self.input_profil.setText('')
