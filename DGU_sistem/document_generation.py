@@ -25,7 +25,7 @@ class Ui_Form(object):
             'Type_social': False,
             'Data_start_end': False,
         }
-        self.way_Date_base = 'db/database.db'
+        self.way_Date_base = 'вывод/db/database.db'
         self.pull_down_menu_formats = QtWidgets.QComboBox(Form)
         self.pull_down_menu_formats.setGeometry(QtCore.QRect(110, 60, 291, 22))
         self.pull_down_menu_formats.setObjectName("pull_down_menu_formats")
@@ -220,10 +220,13 @@ class Ui_Form(object):
         often = datetime.datetime(int(date_bd[2]), int(date_bd[1]), int(date_bd[0]))
         time = str(often - before).split(',')[0].split(' ')[0]
         # time = str(time).split(',')[0].split(' ')[0]
-        if int(time) < 0:
-            return f'{date} "истек"   {str(time)} дней прошло'
-        else:
-            return f'{date} "не истек"   {str(time)} дней осталось'
+        try:
+            if int(time) < 0:
+                return f'{date} "истек"   {str(time)} дней прошло'
+            else:
+                return f'{date} "не истек"   {str(time)} дней осталось'
+        except:
+            return f'{date} "сегодня"'
 
 
     def checkbox_1(self):
