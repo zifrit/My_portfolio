@@ -10,12 +10,15 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
+import tesе_pyqt
 
 
 class Ui_DGU_sistem(object):
     def setupUi(self, DGU_sistem):
         DGU_sistem.setObjectName("DGU_sistem")
         DGU_sistem.resize(600, 480)
+        self.aaaa = 1
+        self.import_file = 'иб.xlsx'
         self.way_Date_base = 'db/database.db'
         self.kurs = QtWidgets.QLabel(DGU_sistem)
         self.kurs.setGeometry(QtCore.QRect(50, 100, 60, 16))
@@ -108,28 +111,28 @@ class Ui_DGU_sistem(object):
     def clear_menu(self):
         self.bt_clear.clicked.connect(lambda: self.perform_bt_clear())
 
+    def perform_bt_import(self):
+        tesе_pyqt.pps(self.import_file)
 
     def perform_bt_delete(self):
         FIO = self.input_name.text()
         try:
             with sqlite3.connect(self.way_Date_base) as db:
                 cursor = db.cursor()
-                query = (''' DELETE from DGU_sistem WHERE FIO = ?''')
+                query = (''' DELETE from expenses WHERE FIO = ?''')
                 cursor.execute(query, (FIO,))
                 db.commit()
         except:
             print('ошибка удолениея')
         self.perform_bt_clear()
 
-
-
     def perform_bt_edit(self):
         FIO = self.input_name.text()
         try:
             with sqlite3.connect(self.way_Date_base) as db:
                 cursor = db.cursor()
-                query = (''' DELETE from DGU_sistem WHERE FIO = ?''')
-                cursor.execute(query, (FIO, ))
+                query = (''' DELETE from expenses WHERE FIO = ?''')
+                cursor.execute(query, (FIO,))
                 db.commit()
         except:
             print('ошибка удолениея')
@@ -145,7 +148,7 @@ class Ui_DGU_sistem(object):
                 cursor = db.cursor()
                 insert = [(FIO, Kurs, Profil_student, Type_social, DD_MM_YY_order)]
                 # query = """ CREATE TABLE if not exists expenses (FIO text, kurs integer, profil text, type_social text, dd_orders text ) """
-                query = """ insert into DGU_sistem (FIO, kurs, profil, type_social, dd_orders) values (?, ?, ?, ?, ?);"""
+                query = """ insert into expenses (FIO, kurs, profil, type_social, dd_orders) values (?, ?, ?, ?, ?);"""
                 cursor.executemany(query, insert)
                 db.commit()
         except:
@@ -154,7 +157,7 @@ class Ui_DGU_sistem(object):
     def perform_bt_search(self):
         with sqlite3.connect(self.way_Date_base) as db:
             cursor = db.cursor()
-            cursor.execute((" Select * from DGU_sistem "))
+            cursor.execute((" Select * from expenses "))
             FIO = self.input_name.text()
             for i in cursor:
                 if FIO == i[0]:
@@ -186,7 +189,7 @@ class Ui_DGU_sistem(object):
                 cursor = db.cursor()
                 insert = [(FIO, Kurs, Profil_student, Type_social, DD_MM_YY_order)]
                 # query = """ CREATE TABLE if not exists expenses (FIO text, kurs integer, profil text, type_social text, dd_orders text ) """
-                query = """ insert into DGU_sistem (FIO, kurs, profil, type_social, dd_orders) values (?, ?, ?, ?, ?);"""
+                query = """ insert into expenses (FIO, kurs, profil, type_social, dd_orders) values (?, ?, ?, ?, ?);"""
                 cursor.executemany(query, insert)
                 db.commit()
         except:
