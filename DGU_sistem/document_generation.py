@@ -18,7 +18,7 @@ import sqlite3
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(500, 220)
+        Form.resize(300, 200)
         self.check_what_in_table = {
             'FIO': False,
             'Course': False,
@@ -27,41 +27,44 @@ class Ui_Form(object):
             'Data_start_end': False,
         }
         self.way_Date_base = 'db/database.db'
-        self.pull_down_menu_formats = QtWidgets.QComboBox(Form)
-        self.pull_down_menu_formats.setGeometry(QtCore.QRect(110, 60, 291, 22))
-        self.pull_down_menu_formats.setObjectName("pull_down_menu_formats")
-        self.pull_down_menu_formats.addItem("")
-        self.pull_down_menu_formats.addItem("")
-        self.pull_down_menu_formats.addItem("")
-        self.initializing_tables_bt = QtWidgets.QPushButton(Form)
-        self.initializing_tables_bt.setGeometry(QtCore.QRect(150, 180, 81, 26))
-        self.initializing_tables_bt.setObjectName("initializing_tables_bt")
-        self.lb_info_about_format = QtWidgets.QLabel(Form)
-        self.lb_info_about_format.setGeometry(QtCore.QRect(110, 30, 281, 16))
-        self.lb_info_about_format.setObjectName("lb_info_about_format")
+        # self.pull_down_menu_formats = QtWidgets.QComboBox(Form)
+        # self.pull_down_menu_formats.setGeometry(QtCore.QRect(110, 60, 291, 22))
+        # self.pull_down_menu_formats.setObjectName("pull_down_menu_formats")
+        # self.pull_down_menu_formats.addItem("")
+        # self.pull_down_menu_formats.addItem("")
+        # self.pull_down_menu_formats.addItem("")
+        self.creat_tables_from_excel = QtWidgets.QPushButton(Form)
+        self.creat_tables_from_excel.setGeometry(QtCore.QRect(190, 30, 81, 26))
+        self.creat_tables_from_excel.setObjectName("creat_tables_from_excel")
+        self.creat_tables_from_notepad = QtWidgets.QPushButton(Form)
+        self.creat_tables_from_notepad.setGeometry(QtCore.QRect(190, 80, 81, 26))
+        self.creat_tables_from_notepad.setObjectName("creat_tables_from_notepad")
+        # self.lb_info_about_format = QtWidgets.QLabel(Form)
+        # self.lb_info_about_format.setGeometry(QtCore.QRect(110, 30, 281, 16))
+        # self.lb_info_about_format.setObjectName("lb_info_about_format")
         self.checkBox_fio = QtWidgets.QCheckBox(Form)
-        self.checkBox_fio.setGeometry(QtCore.QRect(10, 140, 85, 21))
+        self.checkBox_fio.setGeometry(QtCore.QRect(15, 20, 85, 21))
         self.checkBox_fio.setObjectName("checkBox_fio")
         self.checkBox_kurss = QtWidgets.QCheckBox(Form)
-        self.checkBox_kurss.setGeometry(QtCore.QRect(70, 140, 85, 21))
+        self.checkBox_kurss.setGeometry(QtCore.QRect(15, 50, 85, 21))
         self.checkBox_kurss.setObjectName("checkBox_kurss")
         self.checkBox_type_of_scholarship = QtWidgets.QCheckBox(Form)
-        self.checkBox_type_of_scholarship.setGeometry(QtCore.QRect(210, 140, 121, 21))
+        self.checkBox_type_of_scholarship.setGeometry(QtCore.QRect(15, 80, 121, 21))
         self.checkBox_type_of_scholarship.setObjectName("checkBox_type_of_scholarship")
         self.checkBox_profil = QtWidgets.QCheckBox(Form)
-        self.checkBox_profil.setGeometry(QtCore.QRect(130, 140, 85, 21))
+        self.checkBox_profil.setGeometry(QtCore.QRect(15, 110, 85, 21))
         self.checkBox_profil.setObjectName("checkBox_profil")
         self.checkBox_date_start_end = QtWidgets.QCheckBox(Form)
-        self.checkBox_date_start_end.setGeometry(QtCore.QRect(330, 140, 151, 21))
+        self.checkBox_date_start_end.setGeometry(QtCore.QRect(15, 140, 151, 21))
         self.checkBox_date_start_end.setObjectName("checkBox_5")
         self.exit = QtWidgets.QPushButton(Form)
-        self.exit.setGeometry(QtCore.QRect(280, 180, 81, 26))
+        self.exit.setGeometry(QtCore.QRect(190, 130, 81, 26))
         self.exit.setObjectName("exit")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        self.click()
+        # self.click()
         self.creat_table_from()
         self.checkbox_1()
         self.checkbox_2()
@@ -72,11 +75,12 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.pull_down_menu_formats.setItemText(0, _translate("Form", "none"))
-        self.pull_down_menu_formats.setItemText(1, _translate("Form", "блокнот"))
-        self.pull_down_menu_formats.setItemText(2, _translate("Form", "excel"))
-        self.initializing_tables_bt.setText(_translate("Form", "click"))
-        self.lb_info_about_format.setText(_translate("Form", "формат получения данных"))
+        # self.pull_down_menu_formats.setItemText(0, _translate("Form", "none"))
+        # self.pull_down_menu_formats.setItemText(1, _translate("Form", "блокнот"))
+        # self.pull_down_menu_formats.setItemText(2, _translate("Form", "excel"))
+        self.creat_tables_from_excel.setText(_translate("Form", "excel"))
+        self.creat_tables_from_notepad.setText(_translate("Form", "notepad"))
+        # self.lb_info_about_format.setText(_translate("Form", "формат получения данных"))
         self.checkBox_fio.setText(_translate("Form", "ФИО"))
         self.checkBox_kurss.setText(_translate("Form", "Курсс"))
         self.checkBox_type_of_scholarship.setText(_translate("Form", "Вид стипендии"))
@@ -84,14 +88,14 @@ class Ui_Form(object):
         self.checkBox_date_start_end.setText(_translate("Form", "Дата начала и конца"))
         self.exit.setText(_translate("Form", "exit"))
 
-    def click(self):
-        self.pull_down_menu_formats.activated[str].connect(self.onActivated)
+    # def click(self):
+    #     self.pull_down_menu_formats.activated[str].connect(self.onActivated)
 
-    def onActivated(self, text):
-        self.initializing_tables_bt.setText(text)
+    # def onActivated(self, text):
+    #     self.initializing_tables_bt.setText(text)
 
     def creat_table_from(self):
-        self.initializing_tables_bt.clicked.connect(lambda: self.perform_creat_table_from())
+        self.creat_tables_from_excel.clicked.connect(lambda: self.perform_creat_table_from())
 
     def perform_creat_table_from(self):
         FIO = []
