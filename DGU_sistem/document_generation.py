@@ -27,21 +27,12 @@ class Ui_Form(object):
             'Data_start_end': False,
         }
         self.way_Date_base = 'db/database.db'
-        # self.pull_down_menu_formats = QtWidgets.QComboBox(Form)
-        # self.pull_down_menu_formats.setGeometry(QtCore.QRect(110, 60, 291, 22))
-        # self.pull_down_menu_formats.setObjectName("pull_down_menu_formats")
-        # self.pull_down_menu_formats.addItem("")
-        # self.pull_down_menu_formats.addItem("")
-        # self.pull_down_menu_formats.addItem("")
         self.creat_tables_from_excel = QtWidgets.QPushButton(Form)
         self.creat_tables_from_excel.setGeometry(QtCore.QRect(190, 30, 81, 26))
         self.creat_tables_from_excel.setObjectName("creat_tables_from_excel")
         self.creat_tables_from_notepad = QtWidgets.QPushButton(Form)
         self.creat_tables_from_notepad.setGeometry(QtCore.QRect(190, 80, 81, 26))
         self.creat_tables_from_notepad.setObjectName("creat_tables_from_notepad")
-        # self.lb_info_about_format = QtWidgets.QLabel(Form)
-        # self.lb_info_about_format.setGeometry(QtCore.QRect(110, 30, 281, 16))
-        # self.lb_info_about_format.setObjectName("lb_info_about_format")
         self.checkBox_fio = QtWidgets.QCheckBox(Form)
         self.checkBox_fio.setGeometry(QtCore.QRect(15, 20, 85, 21))
         self.checkBox_fio.setObjectName("checkBox_fio")
@@ -65,22 +56,19 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
         # self.click()
-        self.creat_table_from()
         self.checkbox_1()
         self.checkbox_2()
         self.checkbox_3()
         self.checkbox_4()
         self.checkbox_5()
+        self.creat_tables_from_notepad.clicked.connect(lambda: self.perform_creat_table_notepad())
+        self.creat_tables_from_excel.clicked.connect(lambda: self.perform_creat_table_excel())
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        # self.pull_down_menu_formats.setItemText(0, _translate("Form", "none"))
-        # self.pull_down_menu_formats.setItemText(1, _translate("Form", "блокнот"))
-        # self.pull_down_menu_formats.setItemText(2, _translate("Form", "excel"))
         self.creat_tables_from_excel.setText(_translate("Form", "excel"))
         self.creat_tables_from_notepad.setText(_translate("Form", "notepad"))
-        # self.lb_info_about_format.setText(_translate("Form", "формат получения данных"))
         self.checkBox_fio.setText(_translate("Form", "ФИО"))
         self.checkBox_kurss.setText(_translate("Form", "Курсс"))
         self.checkBox_type_of_scholarship.setText(_translate("Form", "Вид стипендии"))
@@ -88,21 +76,14 @@ class Ui_Form(object):
         self.checkBox_date_start_end.setText(_translate("Form", "Дата начала и конца"))
         self.exit.setText(_translate("Form", "exit"))
 
-    # def click(self):
-    #     self.pull_down_menu_formats.activated[str].connect(self.onActivated)
-
-    # def onActivated(self, text):
-    #     self.initializing_tables_bt.setText(text)
-
-    def creat_table_from(self):
-        self.creat_tables_from_excel.clicked.connect(lambda: self.perform_creat_table_from())
-
-    def perform_creat_table_from(self):
-        FIO = []
-        Course = []
-        Profile = []
-        Type_social = []
-        Data_start_end = []
+    def perform_creat_table_excel(self):
+        base = {
+            'ФИО': [],
+            'Курс': [],
+            'Профиль': [],
+            'Вид стипендии': [],
+            'Сроки назначения': [],
+        }
         for x, y in self.check_what_in_table.items():
 
             if x == 'FIO' and y == True:
@@ -111,7 +92,7 @@ class Ui_Form(object):
                     cursor = db.cursor()
                     cursor.execute((" Select * from expenses "))
                     for i in cursor:
-                        FIO.append(i[0])
+                        base['ФИО'].append(i[0])
 
             if x == 'Course' and y == True:
                 # print('yes2')
@@ -119,7 +100,7 @@ class Ui_Form(object):
                     cursor = db.cursor()
                     cursor.execute((" Select * from expenses "))
                     for i in cursor:
-                        Course.append(str(i[1]))
+                        base['Курс'].append(str(i[1]))
 
             if x == 'Profile' and y == True:
                 # print('yes3')
@@ -127,7 +108,7 @@ class Ui_Form(object):
                     cursor = db.cursor()
                     cursor.execute((" Select * from expenses "))
                     for i in cursor:
-                        Profile.append(i[2])
+                        base['Профиль'].append(i[2])
 
             if x == 'Type_social' and y == True:
                 # print('yes4')
@@ -135,7 +116,7 @@ class Ui_Form(object):
                     cursor = db.cursor()
                     cursor.execute((" Select * from expenses "))
                     for i in cursor:
-                        Type_social.append(i[3])
+                        base['Вид стипендии'].append(i[3])
 
             if x == 'Data_start_end' and y == True:
                 # print('yes5')
@@ -144,70 +125,57 @@ class Ui_Form(object):
                     cursor.execute((" Select * from expenses "))
                     for i in cursor:
                         # self.check_end(i[4])
-                        Data_start_end.append(self.check_end(i[4]))
+                        base['Сроки назначения'].append(self.check_end(i[4]))
             else:
                 # print('yes6')
                 pass
+        new_base = {}
+        for i, j in base.items():
+            if j != []:
+                new_base[i] = j
+        base = pd.DataFrame(new_base)
+        base.to_excel('../вывод/teams.xlsx', sheet_name='report')
 
-        base = {
-            'ФИО': FIO,
-            'Курс': Course,
-            'Профиль': Profile,
-            'Вид стипендии': Type_social,
-            'Сроки назначения': Data_start_end,
-        }
-        if self.initializing_tables_bt.text() == 'excel':
-            new_base = {}
-            for i, j in base.items():
-                if j != []:
-                    new_base[i] = j
-            base = pd.DataFrame(new_base)
-            # print(base)
-            base.to_excel('../вывод/teams.xlsx', sheet_name='report')
+    def perform_creat_table_notepad(self):
+        with sqlite3.connect(self.way_Date_base) as db:
+            cursor = db.cursor()
+            cursor.execute((" Select * from expenses "))
+            with open('../вывод/Таблица со степендиантыми.txt', 'w', encoding='utf-8') as file:
+                file.write(
+                    '|ФИО' + ' ' * 37 + '|Курс ' + '|Профиль   ' + '|Вид стипендии' + ' ' * 17 + '|Дата стипендии\n')
+            for i in cursor:
+                if self.check_what_in_table['FIO'] == True:
+                    len_nema = i[0] + (' ' * (40 - len(i[0])))
+                else:
+                    len_nema = (' ' * 40)
 
+                if self.check_what_in_table['Course'] == True:
+                    len_kurs = str(i[1]) + ('    ')
+                else:
+                    len_kurs = ('     ')
 
-        elif self.initializing_tables_bt.text() == 'блокнот':
-            with sqlite3.connect(self.way_Date_base) as db:
-                cursor = db.cursor()
-                cursor.execute((" Select * from expenses "))
-                with open('../вывод/Таблица со степендиантыми.txt', 'w', encoding='utf-8') as file:
-                    file.write(
-                        '|ФИО' + ' ' * 37 + '|Курс ' + '|Профиль   ' + '|Вид стипендии' + ' ' * 17 + '|Дата стипендии\n')
-                for i in cursor:
-                    if self.check_what_in_table['FIO'] == True:
-                        len_nema = i[0] + (' ' * (40 - len(i[0])))
-                    else:
-                        len_nema = (' ' * 40)
+                if self.check_what_in_table['Profile'] == True:
+                    len_profil = i[2] + (' ' * (10 - len(i[2])))
+                else:
+                    len_profil = ' ' * 10
 
-                    if self.check_what_in_table['Course'] == True:
-                        len_kurs = str(i[1]) + ('    ')
-                    else:
-                        len_kurs = ('     ')
+                if self.check_what_in_table['Type_social'] == True:
+                    len_type_social = i[3] + (' ' * (30 - len(i[3])))
+                else:
+                    len_type_social = ' ' * 30
 
-                    if self.check_what_in_table['Profile'] == True:
-                        len_profil = i[2] + (' ' * (10 - len(i[2])))
-                    else:
-                        len_profil = ' ' * 10
+                if self.check_what_in_table['Data_start_end'] == True:
+                    # i[4] = self.check_end(str(i[4]))
+                    # print(i[4])
+                    len_date_start_end = self.check_end(i[4]) + (' ' * (60 - len(self.check_end(i[4]))))
+                else:
+                    len_date_start_end = ' ' * 60
 
-                    if self.check_what_in_table['Type_social'] == True:
-                        len_type_social = i[3] + (' ' * (30 - len(i[3])))
-                    else:
-                        len_type_social = ' ' * 30
-
-                    if self.check_what_in_table['Data_start_end'] == True:
-                        # i[4] = self.check_end(str(i[4]))
-                        # print(i[4])
-                        len_date_start_end = self.check_end(i[4]) + (' ' * (60 - len(self.check_end(i[4]))))
-                    else:
-                        len_date_start_end = ' ' * 60
-
-                    with open('../вывод/Таблица со степендиантыми.txt', 'a', encoding='utf-8') as file:
-                        file.write('+' + '-' * 128 + '+\n')
-                        file.write(f'|{len_nema}|{len_kurs}|{len_profil}|{len_type_social}|{len_date_start_end}\n')
-                        file.write('+' + '-' * 128 + '+\n')
-                db.commit()
-        elif self.initializing_tables_bt.text() == 'none' or self.initializing_tables_bt.text() == 'click':
-            print('3')
+                with open('../вывод/Таблица со степендиантыми.txt', 'a', encoding='utf-8') as file:
+                    file.write('+' + '-' * 128 + '+\n')
+                    file.write(f'|{len_nema}|{len_kurs}|{len_profil}|{len_type_social}|{len_date_start_end}\n')
+                    file.write('+' + '-' * 128 + '+\n')
+            db.commit()
 
     def check_end(self, date):
         import datetime
