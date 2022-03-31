@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QMessageBox
 import pandas as pd
 import sqlite3
 
@@ -25,7 +26,7 @@ class Ui_Form(object):
             'Type_social': False,
             'Data_start_end': False,
         }
-        self.way_Date_base = 'вывод/db/database.db'
+        self.way_Date_base = 'db/database.db'
         self.pull_down_menu_formats = QtWidgets.QComboBox(Form)
         self.pull_down_menu_formats.setGeometry(QtCore.QRect(110, 60, 291, 22))
         self.pull_down_menu_formats.setObjectName("pull_down_menu_formats")
@@ -100,7 +101,6 @@ class Ui_Form(object):
         Data_start_end = []
         for x, y in self.check_what_in_table.items():
 
-
             if x == 'FIO' and y == True:
                 # print('yes1')
                 with sqlite3.connect(self.way_Date_base) as db:
@@ -108,7 +108,6 @@ class Ui_Form(object):
                     cursor.execute((" Select * from expenses "))
                     for i in cursor:
                         FIO.append(i[0])
-
 
             if x == 'Course' and y == True:
                 # print('yes2')
@@ -118,7 +117,6 @@ class Ui_Form(object):
                     for i in cursor:
                         Course.append(str(i[1]))
 
-
             if x == 'Profile' and y == True:
                 # print('yes3')
                 with sqlite3.connect(self.way_Date_base) as db:
@@ -127,7 +125,6 @@ class Ui_Form(object):
                     for i in cursor:
                         Profile.append(i[2])
 
-
             if x == 'Type_social' and y == True:
                 # print('yes4')
                 with sqlite3.connect(self.way_Date_base) as db:
@@ -135,7 +132,6 @@ class Ui_Form(object):
                     cursor.execute((" Select * from expenses "))
                     for i in cursor:
                         Type_social.append(i[3])
-
 
             if x == 'Data_start_end' and y == True:
                 # print('yes5')
@@ -163,14 +159,14 @@ class Ui_Form(object):
                     new_base[i] = j
             base = pd.DataFrame(new_base)
             # print(base)
-            base.to_excel('./teams.xlsx', sheet_name='report')
+            base.to_excel('../вывод/teams.xlsx', sheet_name='report')
 
 
         elif self.initializing_tables_bt.text() == 'блокнот':
             with sqlite3.connect(self.way_Date_base) as db:
                 cursor = db.cursor()
                 cursor.execute((" Select * from expenses "))
-                with open('Таблица со степендиантыми.txt', 'w', encoding='utf-8') as file:
+                with open('../вывод/Таблица со степендиантыми.txt', 'w', encoding='utf-8') as file:
                     file.write(
                         '|ФИО' + ' ' * 37 + '|Курс ' + '|Профиль   ' + '|Вид стипендии' + ' ' * 17 + '|Дата стипендии\n')
                 for i in cursor:
@@ -197,11 +193,11 @@ class Ui_Form(object):
                     if self.check_what_in_table['Data_start_end'] == True:
                         # i[4] = self.check_end(str(i[4]))
                         # print(i[4])
-                        len_date_start_end = self.check_end(i[4]) + (' ' * (60 -len(self.check_end(i[4]))))
+                        len_date_start_end = self.check_end(i[4]) + (' ' * (60 - len(self.check_end(i[4]))))
                     else:
                         len_date_start_end = ' ' * 60
 
-                    with open('Таблица со степендиантыми.txt', 'a', encoding='utf-8') as file:
+                    with open('../вывод/Таблица со степендиантыми.txt', 'a', encoding='utf-8') as file:
                         file.write('+' + '-' * 128 + '+\n')
                         file.write(f'|{len_nema}|{len_kurs}|{len_profil}|{len_type_social}|{len_date_start_end}\n')
                         file.write('+' + '-' * 128 + '+\n')
@@ -209,10 +205,10 @@ class Ui_Form(object):
         elif self.initializing_tables_bt.text() == 'none' or self.initializing_tables_bt.text() == 'click':
             print('3')
 
-
     def check_end(self, date):
         import datetime
-        if date in ['сирота', 'бессрочно', 'инвалид', 'Инвалид', 'ИНВАЛИД', 'Бессрочно', 'БЕССРОЧНО', 'Сирота', 'СИРОТА']:
+        if date in ['сирота', 'бессрочно', 'инвалид', 'Инвалид', 'ИНВАЛИД', 'Бессрочно', 'БЕССРОЧНО', 'Сирота',
+                    'СИРОТА']:
             return date
         date_bd = date.split('-')[1].split('.')
         # print(date_bd)
@@ -228,11 +224,10 @@ class Ui_Form(object):
         except:
             return f'{date} "сегодня"'
 
-
     def checkbox_1(self):
         self.checkBox_fio.stateChanged.connect(self.perform_checkBox_1)
 
-    def perform_checkBox_1(self,    state):
+    def perform_checkBox_1(self, state):
         if state == Qt.Checked:
             self.check_what_in_table['FIO'] = True
         else:
