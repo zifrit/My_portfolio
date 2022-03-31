@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
 import tesе_pyqt
+from PyQt5.QtWidgets import QMessageBox
 
 
 class Ui_DGU_sistem(object):
@@ -99,7 +100,7 @@ class Ui_DGU_sistem(object):
         self.bt_clear.setText(_translate("DGU_sistem", "Очистить"))
         self.bt_creat.setText(_translate("DGU_sistem", "Создать таблицу"))
         self.bt_edit.setText(_translate("DGU_sistem", "Изменить"))
-        self.bt_delete.setText(_translate("DGU_sistem", "Удолить"))
+        self.bt_delete.setText(_translate("DGU_sistem", "Удалить"))
         self.bt_import.setText(_translate("DGU_sistem", "Импорт"))
 
     def add_to_base(self):
@@ -111,8 +112,17 @@ class Ui_DGU_sistem(object):
     def clear_menu(self):
         self.bt_clear.clicked.connect(lambda: self.perform_bt_clear())
 
+    def box(self, text):
+        box_info = QMessageBox()
+        box_info.setWindowTitle('Information')
+        box_info.setText(text)
+        box_info.setIcon(QMessageBox.Information)
+        box_info.setStandardButtons(QMessageBox.Ok)
+        box_info.exec_()
+
     def perform_bt_import(self):
         tesе_pyqt.pps(self.import_file)
+        self.box('Импорт произведен')
 
     def perform_bt_delete(self):
         FIO = self.input_name.text()
@@ -123,8 +133,9 @@ class Ui_DGU_sistem(object):
                 cursor.execute(query, (FIO,))
                 db.commit()
         except:
-            print('ошибка удолениея')
-        self.perform_bt_clear()
+            print('ошибка удаление')
+            self.box('не возможно удалить, проверьте корректность данных ')
+        # self.perform_bt_clear()
 
     def perform_bt_edit(self):
         FIO = self.input_name.text()
