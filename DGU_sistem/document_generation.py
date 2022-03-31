@@ -55,14 +55,13 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        # self.click()
-        self.checkbox_1()
-        self.checkbox_2()
-        self.checkbox_3()
-        self.checkbox_4()
-        self.checkbox_5()
         self.creat_tables_from_notepad.clicked.connect(lambda: self.perform_creat_table_notepad())
         self.creat_tables_from_excel.clicked.connect(lambda: self.perform_creat_table_excel())
+        self.checkBox_fio.stateChanged.connect(self.perform_checkBox_1)
+        self.checkBox_kurss.stateChanged.connect(self.perform_checkBox_2)
+        self.checkBox_profil.stateChanged.connect(self.perform_checkBox_3)
+        self.checkBox_type_of_scholarship.stateChanged.connect(self.perform_checkBox_4)
+        self.checkBox_date_start_end.stateChanged.connect(self.perform_checkBox_5)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -196,8 +195,8 @@ class Ui_Form(object):
         except:
             return f'{date} "сегодня"'
 
-    def checkbox_1(self):
-        self.checkBox_fio.stateChanged.connect(self.perform_checkBox_1)
+    # def checkbox_1(self):
+    #     self.checkBox_fio.stateChanged.connect(self.perform_checkBox_1)
 
     def perform_checkBox_1(self, state):
         if state == Qt.Checked:
@@ -205,8 +204,8 @@ class Ui_Form(object):
         else:
             self.check_what_in_table['FIO'] = False
 
-    def checkbox_2(self):
-        self.checkBox_kurss.stateChanged.connect(self.perform_checkBox_2)
+    # def checkbox_2(self):
+    #     self.checkBox_kurss.stateChanged.connect(self.perform_checkBox_2)
 
     def perform_checkBox_2(self, state):
         if state == Qt.Checked:
@@ -214,8 +213,8 @@ class Ui_Form(object):
         else:
             self.check_what_in_table['Course'] = False
 
-    def checkbox_3(self):
-        self.checkBox_profil.stateChanged.connect(self.perform_checkBox_3)
+    # def checkbox_3(self):
+    #     self.checkBox_profil.stateChanged.connect(self.perform_checkBox_3)
 
     def perform_checkBox_3(self, state):
         if state == Qt.Checked:
@@ -223,8 +222,8 @@ class Ui_Form(object):
         else:
             self.check_what_in_table['Profile'] = False
 
-    def checkbox_4(self):
-        self.checkBox_type_of_scholarship.stateChanged.connect(self.perform_checkBox_4)
+    # def checkbox_4(self):
+    #     self.checkBox_type_of_scholarship.stateChanged.connect(self.perform_checkBox_4)
 
     def perform_checkBox_4(self, state):
         if state == Qt.Checked:
@@ -232,8 +231,8 @@ class Ui_Form(object):
         else:
             self.check_what_in_table['Type_social'] = False
 
-    def checkbox_5(self):
-        self.checkBox_date_start_end.stateChanged.connect(self.perform_checkBox_5)
+    # def checkbox_5(self):
+    #     self.checkBox_date_start_end.stateChanged.connect(self.perform_checkBox_5)
 
     def perform_checkBox_5(self, state):
         if state == Qt.Checked:
