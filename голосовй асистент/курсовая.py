@@ -11,8 +11,8 @@ import requests
 
 engine = pyttsx3.init()
 
-cmd1 = {'chek_search': ('найди', 'найти', "поищи"),
-        'chek_translate': ("перевести", "переведи"),
+cmd1 = {'check_search': ('найди', 'найти', "поищи"),
+        'check_translate': ("перевести", "переведи"),
         'name': ('пятница', 'friday', 'катэрия'),
         'question': ('как', 'где', 'почему', 'что'),
         'search':
@@ -41,6 +41,8 @@ cmd1 = {'chek_search': ('найди', 'найти', "поищи"),
         }
         }
 
+engine = pyttsx3.init()
+
 
 def speak(what):
     engine.say(what)
@@ -52,9 +54,9 @@ def name(voice_text):
     text = voice_text.split()
     if text[0] in cmd1['name']:
         del text[0]
-        chek(ls_text=text, full_text=voice_text)
+        check(ls_text=text, full_text=voice_text)
     else:
-        chek(ls_text=text, full_text=voice_text)
+        check(ls_text=text, full_text=voice_text)
 
 
 counter = 0
@@ -102,9 +104,9 @@ def sleep_say():
 def sleep():
     while True:
         print('sleep')
-        chek = sleep_say()
-        if chek == 'пятница':
-            print(chek)
+        check = sleep_say()
+        if check == 'пятница':
+            print(check)
             break
 
 
@@ -122,14 +124,14 @@ def recognize_cmd(processed_voice):
 
 
 # функция получает текст из функции say и проверяет что нужно сделать найти, перевести...
-def chek(ls_text, full_text):
+def check(ls_text, full_text):
     # Разделяет тест на слова и предлоги, после чего образует из них список
     text_voice = ls_text
     # TODO проверка типа данных
     for i in text_voice:
         print(type(i))
     # Опридиляет нужноли пользователю что-то найти или перевести
-    if text_voice[0] in cmd1['chek_search'] or text_voice[0] in cmd1['chek_translate']:
+    if text_voice[0] in cmd1['check_search'] or text_voice[0] in cmd1['check_translate']:
         length = 3
         buffer = separator(text_voice, length)
         # TODO проверка команды
@@ -329,12 +331,13 @@ def commands(text):
         webbrowser.open(
             'https://translate.yandex.ru/?utm_source=wizard&lang=ru-en&text={}'.format(text['text_command']))
 
-speak('как дела')
+
+# speak('как дела')
 # name('пятница где находится китай')
-# while True:
-#     a = input('aa')
-#     speak(a)
-a = 'открыть гугл'
+while True:
+    speak('здравствуй пользователь')
+    name(say())
+# a = ''
 name(a)
 
 # print(a.split())
