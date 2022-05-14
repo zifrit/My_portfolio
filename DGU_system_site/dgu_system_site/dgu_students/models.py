@@ -12,47 +12,39 @@ class Student(models.Model):
                                verbose_name='профиль студента')
     type_status = models.ForeignKey(to='TypeStatus', null=True, default=None, on_delete=models.CASCADE,
                                verbose_name='вид стипендии/статус студента')
-    start_and_end_period = models.ForeignKey(to='SaEPeriod', null=True, default=None, on_delete=models.CASCADE,
-                               verbose_name='начало/конец назначения')
-
+    start_and_end_period = models.CharField(max_length=100, verbose_name='дата назначения', null=True , default=None)
+    faculty = models.ForeignKey(to='Faculty', null=True, default=None, on_delete=models.CASCADE,
+                               verbose_name='факультет')
 
 class Course(models.Model):
-    name = models.IntegerField(max_length=10)
+    name = models.CharField(max_length=10)
 
     class Meta:
         db_table = 'Course'
 
     def __str__(self):
         return self.name
-
-
 class ProfileStudent(models.Model):
-    name = models.IntegerField(max_length=10)
+    name = models.CharField(max_length=10)
 
     class Meta:
         db_table = 'ProfileStudent'
 
     def __str__(self):
         return self.name
-
-
-
 class TypeStatus(models.Model):
-    name = models.IntegerField(max_length=10)
+    name = models.CharField(max_length=10)
 
     class Meta:
         db_table = 'TypeStatus'
 
     def __str__(self):
         return self.name
-
-
-
-class SaEPeriod(models.Model):
-    name = models.IntegerField(max_length=10)
+class Faculty(models.Model):
+    name = models.CharField(max_length=10)
 
     class Meta:
-        db_table = 'SaEPeriod'
+        db_table = 'Faculty'
 
     def __str__(self):
         return self.name
