@@ -1,0 +1,73 @@
+.start{
+    display: flex;
+    width: 400px;
+    justify-content: center;
+    flex-direction: column;
+    /*justify-content: center;*/
+    position: relative;
+    margin-left: 150px;
+    margin-top: 50px;
+
+}
+.fream{
+        box-shadow: 0 0 5px 5px #c2c2bc;
+}
+.FIO_input, .type_status_input, .course_input, .profile_student_input, .start_and_end_period_input, .faculty_input {
+    /*background: red;*/
+    margin-top: 10px;
+    width: 350px;
+    font-size: 25px;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 15px;
+    border: 1px solid gray;
+}
+
+.p_input{
+    margin: 0;
+    width: 350px;
+    font-size: 25px;
+    color: #494848;
+    font-family: "Verdana";
+}
+
+.main-menu{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background: #2c2c2c;
+    display: flex;
+}
+
+.main-menu a{
+    color: gray;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 25px;
+}
+.main-menu p{
+    font-size: 30px;
+    color: gray;
+    margin-top: 10px;
+}
+.main-menu ss{
+    font-size: 30px;
+    color: gray;
+    /*margin-top: 7px;*/
+    padding-top: 7px;
+    padding-right: 10px;
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+
+#add {
+    margin: 7px;
+    width: 130px;
+    position: relative;
+    padding: 5px 15px;
+    background: #99e0b2;
+    border: 0 none;
+    border-radius: 5px;
+}

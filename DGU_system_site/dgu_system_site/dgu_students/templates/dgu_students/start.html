@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}start{% endblock %}
+{% block content %}
+<div class="start">
+    <form action="." method="get" class="fream">
+    <p class="p_input FIO">ФИО
+        <input type="text" class="FIO_input" placeholder="Enter FIO">
+    </p>
+    <p class="p_input course">Курс
+        <input type="text" class="course_input" placeholder="Enter Course ">
+    </p>
+    <p class="p_input profile_student">Направление
+        <input type="text" class="profile_student_input" placeholder="Enter Profile student ">
+    </p>
+    <p class="p_input type_status">Статус
+        <input type="text" class="type_status_input" placeholder="Enter Type status ">
+    </p>
+    <p class="p_input start_and_end_period">Начало/конец назначения
+        <input type="text" class="start_and_end_period_input" placeholder="Enter Data">
+    </p>
+    <p class="p_input faculty">Факультет
+        <input type="text" class="faculty_input" placeholder="Enter Faculty">
+    </p>
+    <input type="submit" value="добавить" id="add">
+<!--    <input type="text">-->
+<!--    <input type="text">-->
+<!--    <input type="text">-->
+<!--    <input type="text">-->
+</form>
+</div>
+{% endblock %}
