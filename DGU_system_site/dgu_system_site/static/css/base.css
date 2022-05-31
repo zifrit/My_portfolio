@@ -1,16 +1,15 @@
 .start{
     display: flex;
     width: 400px;
-    justify-content: center;
-    flex-direction: column;
     /*justify-content: center;*/
-    position: relative;
-    margin-left: 150px;
-    margin-top: 50px;
+    /*flex-direction: column;*/
+    /*position: relative;*/
+    /*margin-left: 150px;*/
+    /*margin-top: 50px;*/
 
 }
 .fream{
-        box-shadow: 0 0 5px 5px #c2c2bc;
+    box-shadow: 0 0 5px 5px #dbe1e1;
 }
 .FIO_input, .type_status_input, .course_input, .profile_student_input, .start_and_end_period_input, .faculty_input {
     /*background: red;*/
@@ -24,8 +23,9 @@
 }
 
 .p_input{
-    margin: 0;
-    width: 350px;
+    /*margin: 0 15px;*/
+    margin: auto;
+    width: 380px;
     font-size: 25px;
     color: #494848;
     font-family: "Verdana";
@@ -53,7 +53,6 @@
 .main-menu ss{
     font-size: 30px;
     color: gray;
-    /*margin-top: 7px;*/
     padding-top: 7px;
     padding-right: 10px;
 }
@@ -63,11 +62,29 @@ body{
 }
 
 #add {
-    margin: 7px;
+    margin: 10px 600px;
     width: 130px;
     position: relative;
     padding: 5px 15px;
     background: #99e0b2;
     border: 0 none;
     border-radius: 5px;
+}
+
+ .list a {
+    /*background: #004cff;*/
+     transition-duration: 0.5s;
+}
+
+.list a:hover {
+    background: #004cff;
+    color: white;
+}
+
+.test {
+    display: flex;
+}
+
+.row {
+    flex-direction: column;
 }

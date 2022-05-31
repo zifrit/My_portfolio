@@ -1,31 +1,100 @@
 {% extends "base.html" %}
-{% block title %}start{% endblock %}
+{% block title %}Добавить{% endblock %}
 {% block content %}
-<div class="start">
-    <form action="." method="get" class="fream">
-    <p class="p_input FIO">ФИО
-        <input type="text" class="FIO_input" placeholder="Enter FIO">
-    </p>
-    <p class="p_input course">Курс
-        <input type="text" class="course_input" placeholder="Enter Course ">
-    </p>
-    <p class="p_input profile_student">Направление
-        <input type="text" class="profile_student_input" placeholder="Enter Profile student ">
-    </p>
-    <p class="p_input type_status">Статус
-        <input type="text" class="type_status_input" placeholder="Enter Type status ">
-    </p>
-    <p class="p_input start_and_end_period">Начало/конец назначения
-        <input type="text" class="start_and_end_period_input" placeholder="Enter Data">
-    </p>
-    <p class="p_input faculty">Факультет
-        <input type="text" class="faculty_input" placeholder="Enter Faculty">
-    </p>
-    <input type="submit" value="добавить" id="add">
-<!--    <input type="text">-->
-<!--    <input type="text">-->
-<!--    <input type="text">-->
-<!--    <input type="text">-->
-</form>
-</div>
+<!--<div class="start">-->
+<!--    <form action="." method="post" class="fream">-->
+<!--    {% csrf_token %}-->
+<!--    <p class="p_input FIO">ФИО-->
+<!--        <input type="text" class="FIO_input" placeholder="Enter FIO" name="FIO_input">-->
+<!--    </p>-->
+<!--    <p class="p_input course">Курс-->
+<!--        <input type="text" class="course_input" placeholder="Enter Course" name="course_input">-->
+<!--    </p>-->
+<!--    <p class="p_input profile_student">Направление-->
+<!--        <input type="text" class="profile_student_input" placeholder="Enter Profile student " name="profile_student_input">-->
+<!--    </p>-->
+<!--    <p class="p_input type_status">Статус-->
+<!--        <input type="text" class="type_status_input" placeholder="Enter Type status " name="type_status_input">-->
+<!--    </p>-->
+<!--    <p class="p_input start_and_end_period">Начало/конец назначения-->
+<!--        <input type="text" class="start_and_end_period_input" placeholder="Enter Data" name="start_and_end_period_input">-->
+<!--    </p>-->
+<!--    <p class="p_input faculty">Факультет-->
+<!--        <input type="text" class="faculty_input" placeholder="Enter Faculty" name="faculty_input">-->
+<!--    </p>-->
+<!--    <input type="submit" value="добавить" id="add">-->
+<!--        {{key}}-->
+<!--&lt;!&ndash;    <input type="text">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text">&ndash;&gt;-->
+<!--</form>-->
+<!--</div>-->
+<div class="col-md-7 col-lg-8" style="width: 150vh; margin-left: 50px; ">
+        <br><br>
+        <h2 class="mb-3">Форма добавления</h2>
+        <h2 class="mb-3">{{ key }}</h2>
+        <br><br>
+        <form class="needs-validation" novalidate="" method="post">
+            {% csrf_token %}
+          <div class=" g-3">
+            <div class="col-5">
+              <label for="lastName" class="form-label">Ф.И.О (Фамилия Имя Отчество)</label>
+              <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+            </div>
+
+            <div class="col-5">
+              <label class="form-label">Курс</label>
+              <div class="input-group has-validation">
+                <input type="text" class="form-control"  placeholder="1 курс" required="">
+              </div>
+            </div>
+
+            <div class="col-5">
+              <label class="form-label">Направление</label>
+              <input type="text" class="form-control" placeholder="ИСИП">
+            </div>
+
+            <div class="col-5">
+              <label for="address" class="form-label">Вид стипендии</label>
+              <input type="text" class="form-control" id="address" placeholder="Академическая" required="">
+            </div>
+
+            <div class="col-5">
+              <label for="address2" class="form-label">Начало/конец назначения</label>
+              <input type="text" class="form-control" id="address2" placeholder="DD.MM.YYYY-DD.MM.YYYY">
+            </div>
+
+            <div class="col-5">
+              <label for="address2" class="form-label">Факультет</label>
+              <input type="text" class="form-control" placeholder="ФИиИТ">
+            </div>
+          </div>
+          <br><br><br>
+<!--          <hr class="my-4">-->
+           <DIV class="center" >
+          <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Добавить студента</button>
+           </DIV>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </form>
+      </div>
 {% endblock %}
