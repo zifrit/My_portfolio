@@ -15,47 +15,40 @@
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
 </head>
 <body>
-<!--<div class="main-menu">-->
-<!--    <ss>DGU_system</ss>-->
-<!--    <p>|</p>-->
-<!--    <a href="#">Добавить студента</a>-->
-<!--    <p>|</p>-->
-<!--    <a href="#">Поиск студента</a>-->
-<!--    <p>|</p>-->
-<!--    <a href="#">...</a>-->
-<!--</div>-->
 <div class="test">
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <svg class="bi pe-none me-2" width="40" height="32"></svg>
-            <span class="fs-4">DGU Site</span>
-        </a>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto list">
-            <li class="nav-item ">
-                <a href="/" class="nav-link link-dark " aria-current="page">
-                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                    Добавить студента
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
-                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                    Поиск
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
-                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                    Регистрация
-                </a>
-            </li>
-        </ul>
-        <hr>
-        <div>
-            <strong>пользователь</strong>
-            <strong>|</strong>
-            <a href="#" class=" link-dark text-decoration-none"><strong>выйти</strong></a>
+    <div>
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi pe-none me-2" width="40" height="32"></svg>
+                <span class="fs-4">DGU Site</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto list">
+                <li class="nav-item ">
+                    <a href="{% url 'register-student'%}" class="nav-link link-dark " aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                        Добавить студента
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link link-dark">
+                        <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                        Поиск
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link link-dark">
+                        <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                        Регистрация
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div>
+                <strong>пользователь</strong>
+                <strong>|</strong>
+                <a href="#" class=" link-dark text-decoration-none"><strong>выйти</strong></a>
+            </div>
         </div>
     </div>
     {% block content %}

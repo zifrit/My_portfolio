@@ -23,7 +23,7 @@ class AddStudent(View):
         return render(request, 'dgu_students/start.html', {'key': 'post запрос'})
 
 
-class start(View):
+class MainPage(View):
     def get(self, request):
         print('get')
         return render(request, 'base.html', {})
