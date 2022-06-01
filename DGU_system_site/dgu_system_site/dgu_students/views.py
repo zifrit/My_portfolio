@@ -3,24 +3,17 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import View
 from .models import Student
-from .addition.test import pp
+from .addition.add_student import add_student
 
 
 class AddStudent(View):
     def get(self, request):
-        # print(request.POST('FIO_input', False))
         return render(request, 'dgu_students/start.html', {})
 
     def post(self, request):
-        FIO = request.POST.get('FIO_input')
-        course = request.POST.get('FIO_input')
-        profile_student = request.POST.get('FIO_input')
-        type_status = request.POST.get('FIO_input')
-        start_and_end_period = request.POST.get('FIO_input')
-        faculty = request.POST.get('FIO_input')
-        # print(text)
-        pp(request)
-        return render(request, 'dgu_students/start.html', {'key': 'post запрос'})
+        if add_student(request):
+            return render(request, 'dgu_students/start.html', {})
+        return render(request, 'dgu_students/start.html', {'key': 'Проверьте на пробелы в конце!!'})
 
 
 class MainPage(View):
